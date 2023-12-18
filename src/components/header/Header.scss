@@ -4,6 +4,20 @@
     padding: 0px 10px;
     font-family: 'Montserrat', sans-serif;
 
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      background-color: #afd3ff;
+      height: 1px;
+      transition: all 0.5s;
+      transform: scale(0);
+    }
+  
+    &:hover::after {
+      transform: scale(1);
+    }
+
     &:hover {
         color: #afd3ff;
         cursor: pointer;
