@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './App.scss';
-import { NavLink } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
+import Header from './components/header/Header';
 
 function App() {
   const DEADLINE = new Date('2024-01-08T01:59:00');
@@ -36,12 +35,13 @@ function App() {
 
   return (
     <>
-      <div className="nav" style={{ position: 'relative' }}>
+      {/* <div className="nav" style={{ position: 'relative' }}>
         <img src={reactLogo} alt="logo" />
         <NavLink to="/">Home</NavLink>
         <NavLink to="/auth">Auth</NavLink>
         <NavLink to="/playground">GraphiQL</NavLink>
-      </div>
+      </div> */}
+      <Header />
       <div className="content">
         <h1 className="title">ДО ДЕДЛАЙНА</h1>
         <div className="timeContainer">
@@ -82,6 +82,18 @@ function App() {
           `}
           </div>
         </div>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
+        <h1>1</h1>
       </div>
     </>
   );
