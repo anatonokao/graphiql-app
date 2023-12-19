@@ -25,7 +25,8 @@
 }
 
 
-.header {
+.header,
+.burger-menu {
     position: relative;
     display: flex;
     justify-content: end;
@@ -47,6 +48,10 @@
 
 }
   
+.burger-menu {
+  display: none;
+}
+
 .custom-select {
     appearance: none;
     -webkit-appearance: none;
@@ -76,4 +81,25 @@
       font-family: 'Montserrat', sans-serif;
       border-radius: 5px;
     }
+}
+
+
+@media (max-width: 550px) {
+
+  .burger-menu {
+    display: flex;
   }
+
+  .header {
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    &.header-display {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+}
