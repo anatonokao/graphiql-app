@@ -4,7 +4,6 @@ import { LocalizationContextType, Texts } from './types';
 
 
 const LocalizationContext = createContext<LocalizationContextType | undefined>(undefined);
-// const LocalizationContext = createContext<LocalizationContextType | undefined>(LocalizationProvider);
 
 export const LocalizationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 

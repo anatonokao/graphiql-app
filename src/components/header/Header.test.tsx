@@ -1,14 +1,17 @@
 import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import App from './App.tsx';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import Header from './Header';
+import { LocalizationProvider } from '../localization/LocalizationContext';
 
-describe('app', () => {
-  test('app render', async () => {
+describe('header', () => {
+  test('header render', async () => {
     render(
       <BrowserRouter>
-        <App />
+        <LocalizationProvider>
+            <Header />
+        </LocalizationProvider>
       </BrowserRouter>,
     );
 

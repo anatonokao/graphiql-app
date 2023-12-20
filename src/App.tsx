@@ -9,12 +9,6 @@ function App() {
 
   return (
     <>
-      {/* <div className="nav" style={{ position: 'relative' }}>
-        <img src={reactLogo} alt="logo" />
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/auth">Auth</NavLink>
-        <NavLink to="/playground">GraphiQL</NavLink>
-      </div> */}
       <LocalizationProvider>
         <Header />
         <WelcomePage />
