@@ -1,7 +1,6 @@
 import React from 'react';
 import './WelcomePage.scss';
 import rsschoolLogo from '../../assets/rs_school_js.svg';
-import imagePerson1 from '../../assets/ava.jpg';
 import { useLocalization } from '../localization/LocalizationContext';
 
 function WelcomePage() {
@@ -18,15 +17,12 @@ function WelcomePage() {
             <h2 className='about-title'>{texts.titleAboutUs}</h2>
             <div className='about-us-container'>
                 <div className='developers'>
-                    <img className='developers__img' src={imagePerson1} alt="rsschool-logo" />
                     <p className='developers__description'>{texts.textPerson1}</p>
                 </div>
                 <div className='developers'>
-                    <img className='developers__img' src={imagePerson1} alt="rsschool-logo" />
                     <p className='developers__description'>{texts.textPerson2}</p>
                 </div>
                 <div className='developers'>
-                    <img className='developers__img' src={imagePerson1} alt="rsschool-logo" />
                     <p className='developers__description'>{texts.textPerson3}</p>
                 </div>
             </div>
