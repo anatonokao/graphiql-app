@@ -1,5 +1,5 @@
 @mixin title {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 600;
   color: $base-text-clr;
 }
@@ -11,10 +11,9 @@
 }
 
 @mixin base-button {
-  border-radius: 10px;
   background-color: $buttons-and-links;
   padding: 10px 20px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   transition: $transition;
   &:hover {
@@ -23,7 +22,6 @@
 }
 
 @mixin neon-button($red: false) {
-  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,7 +29,7 @@
   border: 1px solid white;
   background-color: transparent;
   padding: 10px 20px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   transition: $transition;
   color: $neon-text-clr;
@@ -51,52 +49,14 @@
   }
 }
 
-@mixin base-link {
-  color: $buttons-and-links;
-  transition: $transition;
-  font-size: 1.5rem;
-  &:hover {
-    color: $buttons-and-links-hover;
-  }
-}
-
-@mixin form-title {
-  @include title;
-  font-size: 1.8rem;
-}
-
 @mixin form-input {
-  padding: 10px 20px;
-  background-color: transparent;
-  border: 1px solid transparent;
-  border-bottom: 1px solid $clr-base-2;
-  border-radius: 0;
-  font-size: 1.5rem;
-  transition: $transition;
   &:hover {
-    border: 1px solid $clr-active;
-    border-radius: 10px;
   }
-  &:focus {
-    border: 1px solid $clr-active-3;
-    border-radius: 10px;
-  }
-  &::placeholder {
-    color: $text-clr-caption;
+  ::placeholder {
   }
 }
 
 @mixin form-button {
-  @include base-button;
-  width: fit-content;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: 400;
-  &:disabled {
-    opacity: 0.7;
-    pointer-events: none;
-    cursor: auto;
-  }
 }
 
 @mixin IdeSection {
