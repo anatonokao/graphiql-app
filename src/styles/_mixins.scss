@@ -1,0 +1,85 @@
+@mixin title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: $base-text-clr;
+}
+
+@mixin subtitle {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: $text-clr-caption;
+}
+
+@mixin base-button {
+  background-color: $buttons-and-links;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: $transition;
+  &:hover {
+    background-color: $buttons-and-links-hover;
+  }
+}
+
+@mixin neon-button($red: false) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  border: 1px solid white;
+  background-color: transparent;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: $transition;
+  color: $neon-text-clr;
+  @if $red {
+    border: 1px solid $red-neon-glow;
+  } @else {
+    border: 1px solid $blue-neon-glow;
+  }
+  &:hover {
+    @if $red {
+      border: 1px solid $red-neon-glow;
+      box-shadow: 0 0 10px $red-neon-glow;
+    } @else {
+      border: 1px solid $blue-neon-glow;
+      box-shadow: 0 0 10px $blue-neon-glow;
+    }
+  }
+}
+
+@mixin form-input {
+  &:hover {
+  }
+  ::placeholder {
+  }
+}
+
+@mixin form-button {
+}
+
+@mixin IdeSection {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+  position: relative;
+  font-size: 15px;
+  height: 100%;
+}
+
+@mixin scroll {
+  & ::-webkit-scrollbar {
+  }
+
+  & ::-webkit-scrollbar:horizontal {
+  }
+
+  & ::-webkit-scrollbar-thumb {
+  }
+
+  & ::-webkit-scrollbar-corner {
+  }
+}
