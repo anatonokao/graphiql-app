@@ -3,14 +3,22 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import classes from './AuthForm.module.scss';
+import { NavLink } from 'react-router-dom';
+import { ref } from 'yup';
+import FormField from '@/components/common/FormField.tsx';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(8).max(32).required(),
+  confirmPassword: yup
+    .string()
+    .oneOf([ref('password')], 'password fields must match')
+    .required('confirm password is a required field'),
 });
 type FormData = {
   email: string;
   password: string;
+  confirmPassword?: string;
 };
 const AuthForm = () => {
   const {
@@ -27,33 +35,38 @@ const AuthForm = () => {
     reset();
   };
   return (
-    <div className={classes.container}>
+    <form className={classes.form} onSubmit={handleSubmit(onSubmitHandler)}>
       <h2>Create Account</h2>
-      <form className={classes.form} onSubmit={handleSubmit(onSubmitHandler)}>
-        <label className={classes.label}>
-          <input
-            className={classes.input}
-            {...register('email')}
-            placeholder="email"
-          />
-          {errors.email && (
-            <p className={classes.error}>{errors.email?.message}</p>
-          )}
-        </label>
-        <label className={classes.label}>
-          <input
-            className={classes.input}
-            {...register('password')}
-            placeholder="password"
-            type="password"
-          />
-          <p className={classes.error}>{errors.password?.message}</p>
-        </label>
-        <button disabled={!isValid} className={classes.button} type="submit">
-          sign in
-        </button>
-      </form>
-    </div>
+      <div className={classes.inputs}>
+        <FormField
+          type={'email'}
+          placeholder={'email'}
+          register={{ ...register('email') }}
+          errors={errors.email}
+        />
+        <FormField
+          type={'password'}
+          placeholder={'password'}
+          register={{ ...register('password') }}
+          errors={errors.password}
+        />
+        <FormField
+          type={'password'}
+          placeholder={'confirm password'}
+          register={{ ...register('confirmPassword') }}
+          errors={errors.confirmPassword}
+        />
+      </div>
+      <button disabled={!isValid} className={classes.button} type="submit">
+        sign in
+      </button>
+      <p className={classes.text}>
+        you have an account?
+        <NavLink className={classes.link} to="/">
+          Login
+        </NavLink>
+      </p>
+    </form>
   );
 };
 

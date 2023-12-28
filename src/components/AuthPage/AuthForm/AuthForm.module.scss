@@ -1,29 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@300;400;600&display=swap');
 
-.container {
-  font-family: 'Advent Pro', sans-serif;
+.form {
+  padding: 20px;
   text-align: center;
   font-size: 2rem;
   min-width: 20%;
-  background-color: #242729;
-  border-radius: 30px;
-  color: #47968c;
+  background-color: $clr-base;
+  border-radius: 10px;
 }
-.container h2 {
-  font-size: 40px;
-  font-weight: 600;
+.form h2 {
+  @include form-title;
 }
-
-.form {
-  height: 100%;
-  width: 100%;
-  padding: 20px;
+.inputs {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
+  padding: 20px;
+  gap: 30px;
 }
+
 .label {
   width: 100%;
   position: relative;
@@ -31,44 +25,46 @@
   flex-direction: column;
 }
 .input {
+  @include form-input;
   text-align: center;
-  border-bottom: 1px solid #ffd9d98e;
-  background-color: transparent;
-  padding: 5px;
-  transition: all 0.3s ease;
 }
-.input::placeholder {
-  text-align: center;
-  color: #ffd9d98e;
-  font-size: 20px;
+.inputInvalid {
+  border: 1px solid transparent;
+  border-bottom: 1px solid $red-danger;
+
+  &:hover {
+    border: 1px solid $red-danger;
+  }
+  &:focus {
+    border: 1px solid $red-danger;
+  }
 }
-.input:focus {
-  border-bottom: 1px solid #ffd9d9;
-}
+
 .error {
-  bottom: -2rem;
+  bottom: -1.5rem;
   position: absolute;
-  color: #d55d5d;
-  font-size: 20px;
+  color: $red-danger;
+  font-size: 1rem;
+  @media (max-width: 400px) {
+    font-size: 0.7rem;
+  }
 }
 .button {
-  margin-top: 20px;
+  @include form-button;
+  margin-top: 30px;
   width: 100%;
   text-align: center;
-  color: #ffd9d98e;
-  padding: 5px;
-  border-radius: 20px;
-  border: 1px solid #ffd9d98e;
-  background-color: transparent;
-  transition: all 0.3s ease;
+  &:disabled {
+    opacity: 0.5;
+  }
 }
-.button:hover {
-  border: 1px solid #47968c;
-  color: #47968c;
+.link {
+  @include base-link;
+  font-size: 1.2em;
+  margin-left: 10px;
 }
-.button:disabled {
-  color: #ffd9d98e;
-  cursor: default;
-  border: 1px solid #ffd9d98e;
-  background-color: rgba(73, 58, 58, 0.56);
+.text {
+  @include subtitle;
+  font-size: 1.2rem;
+  margin-top: 10px;
 }

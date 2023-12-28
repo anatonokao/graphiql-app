@@ -13,7 +13,7 @@ import {
 import { setupStore } from './store/store.ts';
 import { Provider } from 'react-redux';
 import DesktopLayout from './components/GraphQl/layouts/DesktopLayout/DesktopLayout.tsx';
-import AuthPage from './components/AuthPage/AuthPage.tsx';
+import StyleGuide from '@/components/StyleGuidePage/StyleGuide.tsx';
 
 const store = setupStore();
 
@@ -21,8 +21,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route path="/" element={<App />} />
-      <Route path="/auth" element={<AuthPage/>} />
+      <Route path="/auth" element={<div>Auth Page</div>} />
       <Route path="/playground" element={<DesktopLayout />} />
+      <Route path="/styleguide" element={<StyleGuide />} />
     </Route>,
   ),
 );
