@@ -3,11 +3,12 @@ import CodeEditorSection from '../../CodeEditorSection/CodeEditorSection.tsx';
 import ResultSection from '../../ResultSection/ResultSection.tsx';
 import styles from './DesktopLayout.module.scss';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import Header from '@/components/header/Header.tsx';
 
 const DesktopLayout: FC = () => {
   return (
     <>
-      <div>Header</div>
+      <Header />
       <div className={styles.ide}>
         <PanelGroup direction="horizontal">
           <Panel minSize={30} maxSize={9999} className={styles.panel}>

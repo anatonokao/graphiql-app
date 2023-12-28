@@ -13,6 +13,7 @@ import { setupStore } from './store/store.ts';
 import { Provider } from 'react-redux';
 import DesktopLayout from './components/GraphQl/layouts/DesktopLayout/DesktopLayout.tsx';
 import StyleGuide from '@/components/StyleGuidePage/StyleGuide.tsx';
+import { LocalizationProvider } from './components/localization/LocalizationContext.tsx';
 
 const store = setupStore();
 
@@ -29,8 +30,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <LocalizationProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </LocalizationProvider>
   </React.StrictMode>,
 );
