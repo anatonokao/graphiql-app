@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import { setupStore } from './store/store.ts';
 import { Provider } from 'react-redux';
+import AuthPage from './components/AuthPage/AuthPage.tsx';
 
 const store = setupStore();
 
@@ -17,7 +18,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route path="/" element={<App />} />
-      <Route path="/auth" element={<div>Auth Page</div>} />
+      <Route path="/auth" element={<AuthPage />} />
       <Route path="/playground" element={<div>GraphiQL Page</div>} />
     </Route>,
   ),
