@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { editorTheme } from '../customTheme.ts';
-import styles from './CodeEditorSection.module.scss';
-const CodeEditorSection = () => {
+import styles from './CodeEditorPanel.module.scss';
+const CodeEditorPanel = () => {
   const [code, setCode] = useState('');
 
   const changeHandler = (value: string) => {
@@ -11,9 +11,8 @@ const CodeEditorSection = () => {
     setCode(value);
   };
   return (
-    <section className={styles.editor}>
+    <section className={styles.editorContainer}>
       <CodeMirror
-        className={styles.code}
         theme={editorTheme()}
         spellCheck={true}
         placeholder={'Write something...'}
@@ -25,4 +24,4 @@ const CodeEditorSection = () => {
   );
 };
 
-export default CodeEditorSection;
+export default CodeEditorPanel;

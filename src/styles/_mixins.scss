@@ -51,6 +51,17 @@
   }
 }
 
+@mixin neon-button-active($red: false) {
+  @include neon-button($red);
+  @if $red {
+    border: 1px solid $red-neon-glow;
+    box-shadow: 0 0 10px $red-neon-glow;
+  } @else {
+    border: 1px solid $blue-neon-glow;
+    box-shadow: 0 0 10px $blue-neon-glow;
+  }
+}
+
 @mixin base-link {
   color: $buttons-and-links;
   transition: $transition;
