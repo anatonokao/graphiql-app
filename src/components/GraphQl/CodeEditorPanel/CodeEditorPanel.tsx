@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
 import { editorTheme } from '../customTheme.ts';
 import styles from './CodeEditorPanel.module.scss';
+import { buildClientSchema } from 'graphql/utilities';
+import { graphql as createSchema } from 'cm6-graphql';
+import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
+import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
+import { setRequest } from '@/store/GraphQl/graphqlSlice.ts';
+
 const CodeEditorPanel = () => {
-  const [code, setCode] = useState('');
+  const { data, isFetching } = graphqlAPI.useGetSchemaQuery();
+
+  const schema = data && buildClientSchema(data);
+
+  const dispatch = useAppDispatch();
+  const code = useAppSelector((state) => state.graphqlSlice.request);
 
   const changeHandler = (value: string) => {
-    console.log(value);
-    setCode(value);
+    dispatch(setRequest(value));
   };
-  return (
+
+  return isFetching ? (
+    <div>loading</div>
+  ) : (
     <section className={styles.editorContainer}>
       <CodeMirror
         theme={editorTheme()}
@@ -18,7 +30,7 @@ const CodeEditorPanel = () => {
         placeholder={'Write something...'}
         value={code}
         onChange={changeHandler}
-        extensions={[javascript({ jsx: true })]}
+        extensions={[createSchema(schema)]}
       />
     </section>
   );
