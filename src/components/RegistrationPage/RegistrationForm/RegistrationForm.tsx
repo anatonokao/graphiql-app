@@ -1,23 +1,25 @@
 import React from 'react';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import classes from './AuthForm.module.scss';
-import { NavLink } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import classes from '@/components/AuthPage/AuthForm/AuthForm.module.scss';
 import FormField from '@/components/common/FormField.tsx';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { NavLink } from 'react-router-dom';
+import * as yup from 'yup';
+import { ref } from 'yup';
+import { FormData } from '@/components/AuthPage/AuthForm/AuthForm.tsx';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { app } from '@/firebase.tsx';
 
-const schemaAuth = yup.object().shape({
+const schemaRegistration = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(8).max(32).required(),
+  confirmPassword: yup
+    .string()
+    .oneOf([ref('password')], 'password fields must match')
+    .required('confirm password is a required field'),
 });
-export type FormData = {
-  email: string;
-  password: string;
-  confirmPassword?: string;
-};
-const AuthForm = () => {
+
+const RegistrationForm = () => {
   const auth = getAuth(app);
   const {
     register,
@@ -26,10 +28,10 @@ const AuthForm = () => {
     reset,
   } = useForm({
     mode: 'all',
-    resolver: yupResolver(schemaAuth),
+    resolver: yupResolver(schemaRegistration),
   });
   const onSubmitHandler = ({ email, password }: FormData) => {
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
@@ -43,7 +45,7 @@ const AuthForm = () => {
   };
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmitHandler)}>
-      <h2>Login to account</h2>
+      <h2>Create Account</h2>
       <div className={classes.inputs}>
         <FormField
           type={'email'}
@@ -57,18 +59,24 @@ const AuthForm = () => {
           register={{ ...register('password') }}
           errors={errors.password}
         />
+        <FormField
+          type={'password'}
+          placeholder={'confirm password'}
+          register={{ ...register('confirmPassword') }}
+          errors={errors.confirmPassword}
+        />
       </div>
       <button disabled={!isValid} className={classes.button} type="submit">
-        login
+        register
       </button>
       <p className={classes.text}>
-        don&apos;t have an account yet?
-        <NavLink className={classes.link} to="/register">
-          Register
+        you have an account?
+        <NavLink className={classes.link} to="/auth">
+          Login
         </NavLink>
       </p>
     </form>
   );
 };
 
-export default AuthForm;
+export default RegistrationForm;
