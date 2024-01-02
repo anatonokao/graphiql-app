@@ -7,17 +7,21 @@ import VariablesPanel from '@/components/GraphQl/VariablesPanel/VariablesPanel.t
 import HeadersPanel from '@/components/GraphQl/HeadersPanel/HeadersPanel.tsx';
 // import Tab from '@/components/GraphQl/TabsWrapper/Tab/Tab.tsx';
 import { TabList, TabPanel, Tabs, Tab } from 'react-tabs';
+import InputUrlApi from '@/components/GraphQl/InputUrlApi/InputUrlApi.tsx';
+import RunBtn from '@/components/GraphQl/RunBtn/RunBtn.tsx';
 
 const DesktopLayout: FC = () => {
   return (
     <>
       <div>Header</div>
       <div className={styles.ide}>
+        <InputUrlApi />
         <PanelGroup direction="horizontal">
           <Panel minSize={30} maxSize={9999} className={styles.panel}>
             <PanelGroup direction="vertical">
               <Panel className={styles.panel}>
                 <h5 className={styles.panelTitle}>Operation</h5>
+                <RunBtn />
                 <CodeEditorPanel />
               </Panel>
               <PanelResizeHandle className={styles.horizontalSeparator} />
