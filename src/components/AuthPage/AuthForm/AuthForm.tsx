@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form';
 import classes from './AuthForm.module.scss';
 import { NavLink } from 'react-router-dom';
 import FormField from '@/components/common/FormField.tsx';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { app } from '@/firebase.tsx';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/firebase.tsx';
+import toast, { Toaster } from 'react-hot-toast';
 
 const schemaAuth = yup.object().shape({
   email: yup.string().email().required(),
@@ -17,8 +18,23 @@ export type FormData = {
   password: string;
   confirmPassword?: string;
 };
+
+export const goToast = (text: string, type: string) => {
+  switch (type) {
+    case 'success':
+      toast.success(`${text}`, {
+        className: classes.toast,
+      });
+      break;
+    case 'error':
+      toast.error(`${text}`, {
+        className: classes.toastError,
+      });
+      break;
+  }
+};
+
 const AuthForm = () => {
-  const auth = getAuth(app);
   const {
     register,
     handleSubmit,
@@ -33,11 +49,34 @@ const AuthForm = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        goToast('Welcome to the team', 'success');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage, errorCode);
+        switch (errorCode) {
+          case 'auth/invalid-email':
+            goToast('This email address is invalid', 'error');
+            break;
+          case 'auth/user-disabled':
+            goToast(
+              'This email address is disabled by the administrator',
+              'error',
+            );
+            break;
+          case 'auth/user-not-found':
+            goToast('This email address is not registered', 'error');
+            break;
+          case 'auth/wrong-password':
+            goToast(
+              'The password is invalid or the user does not have a password',
+              'error',
+            );
+            break;
+          default:
+            goToast(`${errorMessage}`, 'error');
+            break;
+        }
       });
     reset();
   };
@@ -67,6 +106,7 @@ const AuthForm = () => {
           Register
         </NavLink>
       </p>
+      <Toaster />
     </form>
   );
 };

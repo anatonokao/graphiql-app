@@ -6,9 +6,10 @@ import FormField from '@/components/common/FormField.tsx';
 import { NavLink } from 'react-router-dom';
 import * as yup from 'yup';
 import { ref } from 'yup';
-import { FormData } from '@/components/AuthPage/AuthForm/AuthForm.tsx';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { app } from '@/firebase.tsx';
+import { FormData, goToast } from '@/components/AuthPage/AuthForm/AuthForm.tsx';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '@/firebase.tsx';
+import { Toaster } from 'react-hot-toast';
 
 const schemaRegistration = yup.object().shape({
   email: yup.string().email().required(),
@@ -20,7 +21,6 @@ const schemaRegistration = yup.object().shape({
 });
 
 const RegistrationForm = () => {
-  const auth = getAuth(app);
   const {
     register,
     handleSubmit,
@@ -35,11 +35,31 @@ const RegistrationForm = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        goToast('Account is created', 'success');
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage, errorCode);
+        switch (errorCode) {
+          case 'auth/weak-password':
+            goToast('The password is too weak', 'error');
+            break;
+          case 'auth/email-already-in-use':
+            goToast(
+              'This email address is already in use by another account',
+              'error',
+            );
+            break;
+          case 'auth/invalid-email':
+            goToast('This email address is invalid', 'error');
+            break;
+          case 'auth/operation-not-allowed':
+            goToast('Email/password accounts are not enabled', 'error');
+            break;
+          default:
+            goToast(`${errorMessage}`, 'error');
+            break;
+        }
       });
     reset();
   };
@@ -75,6 +95,7 @@ const RegistrationForm = () => {
           Login
         </NavLink>
       </p>
+      <Toaster />
     </form>
   );
 };
