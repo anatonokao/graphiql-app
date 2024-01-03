@@ -19,8 +19,30 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background-color: #21222d;
+  background-color: $clr-base;
   border-radius: 5px;
+}
+
+.docToggler {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background: url('src/assets/doc-btn.svg');
+  position: relative;
+  z-index: 0;
+  filter: contrast(0.5);
+  transition: $transition;
+  &:hover {
+    filter: contrast(1);
+  }
+}
+
+.docPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
 .panelTitle {

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import CodeEditorPanel from '@/components/GraphQl/CodeEditorPanel/CodeEditorPanel.tsx';
 import ResultPanel from '@/components/GraphQl/ResultPanel/ResultPanel.tsx';
 import styles from './DesktopLayout.module.scss';
@@ -10,14 +10,39 @@ import { TabList, TabPanel, Tabs, Tab } from 'react-tabs';
 import InputUrlApi from '@/components/GraphQl/InputUrlApi/InputUrlApi.tsx';
 import RunBtn from '@/components/GraphQl/RunBtn/RunBtn.tsx';
 import Prettifyer from '@/components/GraphQl/Prettifyer/Prettifyer.tsx';
+import DocPanel from '@/components/GraphQl/DocPanel/DocPanel.tsx';
 
 const DesktopLayout: FC = () => {
+  const [isDocPanelOpen, setIsDocPanelOpen] = useState(false);
+
+  const toggleDoc = () => {
+    setIsDocPanelOpen((prevState) => !prevState);
+  };
+
   return (
     <>
       <div>Header</div>
       <div className={styles.ide}>
         <InputUrlApi />
         <PanelGroup direction="horizontal">
+          <button
+            type="button"
+            onClick={toggleDoc}
+            className={styles.docToggler}
+          ></button>
+          <Panel
+            minSize={10}
+            maxSize={9999}
+            defaultSize={30}
+            className={styles.docPanel}
+            style={{ display: isDocPanelOpen ? 'flex' : 'none' }}
+          >
+            <DocPanel />
+          </Panel>
+          <PanelResizeHandle
+            className={styles.separator}
+            style={{ display: isDocPanelOpen ? 'flex' : 'none' }}
+          />
           <Panel minSize={30} maxSize={9999} className={styles.panel}>
             <PanelGroup direction="vertical">
               <Panel className={styles.panel}>
