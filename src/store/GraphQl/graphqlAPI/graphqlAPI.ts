@@ -41,7 +41,8 @@ export const graphqlAPI = createApi({
           ...headers,
         },
       }),
-      transformResponse: (res: { data: object }) => JSON.stringify(res.data),
+      transformResponse: (res: { data: object }) =>
+        JSON.stringify(res.data, null, 2),
     }),
   }),
 });
