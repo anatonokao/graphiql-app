@@ -20,8 +20,10 @@ const DesktopLayout: FC = () => {
           <Panel minSize={30} maxSize={9999} className={styles.panel}>
             <PanelGroup direction="vertical">
               <Panel className={styles.panel}>
-                <h5 className={styles.panelTitle}>Operation</h5>
-                <RunBtn />
+                <div className={styles.header}>
+                  <h5 className={styles.panelTitle}>Operation</h5>
+                  <RunBtn />
+                </div>
                 <CodeEditorPanel />
               </Panel>
               <PanelResizeHandle className={styles.horizontalSeparator} />
