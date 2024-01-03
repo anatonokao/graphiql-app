@@ -7,6 +7,20 @@
   @include base-link;
   padding: 10px 15px;
   font-size: 1.2rem;
+  border-radius: 10px;
+  &:disabled {
+    pointer-events: none;
+    background: linear-gradient(
+      -45deg,
+      transparent 0%,
+      transparent 40%,
+      $clr-base-2 50%,
+      transparent 60%,
+      transparent 100%
+    );
+    background-size: 200% 200%;
+    animation: loading-gradient infinite 2s ease;
+  }
 }
 
 .btnsContainer {
@@ -32,5 +46,17 @@
     &:not(:last-child) {
       border-bottom: 1px solid $clr-base-2;
     }
+  }
+}
+
+@keyframes loading-gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
   }
 }
