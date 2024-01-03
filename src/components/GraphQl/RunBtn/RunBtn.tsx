@@ -14,12 +14,15 @@ const RunBtn = () => {
     graphqlAPI.useLazyGetDataQuery();
 
   useEffect(() => {
-    dispatch(setResponse(JSON.stringify(data || '')));
+    dispatch(setResponse(data || ''));
     dispatch(setError(error || null));
   }, [data, error, dispatch]);
 
   const btnHandler = () => {
-    getData({ url: apiUrl, request, headers, vars });
+    const headersObj = headers ? JSON.parse(headers) : {};
+    const varsObj = vars ? JSON.parse(vars) : {};
+
+    getData({ url: apiUrl, request, headers: headersObj, vars: varsObj });
   };
 
   return (

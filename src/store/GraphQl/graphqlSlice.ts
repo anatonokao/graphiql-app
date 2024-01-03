@@ -6,7 +6,7 @@ interface GraphqlState {
   apiUrl: string;
   request: string;
   vars: string;
-  headers: object;
+  headers: string;
   response: string;
   error: string[];
 }
@@ -15,7 +15,7 @@ const initState: GraphqlState = {
   apiUrl: 'https://rickandmortyapi.com/graphql',
   request: '',
   vars: '',
-  headers: {},
+  headers: '',
   response: '',
   error: [],
 };
@@ -33,7 +33,7 @@ export const graphqlSlice = createSlice({
     setVars(state, action: PayloadAction<string>): void {
       state.vars = action.payload;
     },
-    setHeaders(state, action: PayloadAction<object>): void {
+    setHeaders(state, action: PayloadAction<string>): void {
       state.headers = action.payload;
     },
     setResponse(state, action: PayloadAction<string>): void {

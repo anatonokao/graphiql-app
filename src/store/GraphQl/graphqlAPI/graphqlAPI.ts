@@ -21,7 +21,7 @@ export const graphqlAPI = createApi({
       }),
       transformResponse: (res: { data: IntrospectionQuery }) => res.data,
     }),
-    getData: build.query<object, GraphqlRequest>({
+    getData: build.query<string, GraphqlRequest>({
       query: ({ url, request, headers, vars }) => ({
         url: url,
         method: 'POST',
@@ -34,8 +34,8 @@ export const graphqlAPI = createApi({
           Accept: 'application/json',
           ...headers,
         },
-        transformResponse: (res: { data: object }) => res.data,
       }),
+      transformResponse: (res: { data: object }) => JSON.stringify(res.data),
     }),
   }),
 });
@@ -43,6 +43,6 @@ export const graphqlAPI = createApi({
 interface GraphqlRequest {
   url: string;
   request: string;
-  vars: string;
+  vars: object;
   headers: object;
 }
