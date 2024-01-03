@@ -9,6 +9,7 @@ import HeadersPanel from '@/components/GraphQl/HeadersPanel/HeadersPanel.tsx';
 import { TabList, TabPanel, Tabs, Tab } from 'react-tabs';
 import InputUrlApi from '@/components/GraphQl/InputUrlApi/InputUrlApi.tsx';
 import RunBtn from '@/components/GraphQl/RunBtn/RunBtn.tsx';
+import Prettifyer from '@/components/GraphQl/Prettifyer/Prettifyer.tsx';
 
 const DesktopLayout: FC = () => {
   return (
@@ -22,7 +23,10 @@ const DesktopLayout: FC = () => {
               <Panel className={styles.panel}>
                 <div className={styles.header}>
                   <h5 className={styles.panelTitle}>Operation</h5>
-                  <RunBtn />
+                  <div className={styles.headerRight}>
+                    <Prettifyer />
+                    <RunBtn />
+                  </div>
                 </div>
                 <CodeEditorPanel />
               </Panel>

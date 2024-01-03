@@ -8,6 +8,10 @@
   padding: 10px 15px;
   font-size: 1.2rem;
   border-radius: 10px;
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid $buttons-and-links;
+  }
   &:disabled {
     pointer-events: none;
     background: linear-gradient(
