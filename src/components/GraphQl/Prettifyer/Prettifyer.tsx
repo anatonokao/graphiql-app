@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Prettifyer.module.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setRequest } from '@/store/GraphQl/graphqlSlice.ts';
-import { isQueryValid } from '@/components/GraphQl/Prettifyer/helpers.ts';
+import { isQueryValid } from '@/components/GraphQl/helpers.ts';
 
 const Prettifyer = () => {
   const request = useAppSelector((state) => state.graphqlSlice.request);

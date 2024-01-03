@@ -59,7 +59,9 @@ const DesktopLayout: FC = () => {
           </Panel>
           <PanelResizeHandle className={styles.separator} />
           <Panel minSize={30} maxSize={9999} className={styles.panel}>
-            <h5 className={styles.panelTitle}>Results</h5>
+            <div className={styles.header}>
+              <h5 className={styles.panelTitle}>Results</h5>
+            </div>
             <ResultPanel />
           </Panel>
         </PanelGroup>

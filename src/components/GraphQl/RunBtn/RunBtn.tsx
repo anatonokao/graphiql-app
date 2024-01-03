@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import { setError, setResponse } from '@/store/GraphQl/graphqlSlice.ts';
-import { getOperationsNames } from '@/components/GraphQl/helpers.ts';
+import {
+  getOperationsNames,
+  isQueryValid,
+} from '@/components/GraphQl/helpers.ts';
 import styles from './RunBtn.module.scss';
 const RunBtn = () => {
   const [operationsNames, setOperationNames] = useState<string[]>([]);
@@ -23,6 +26,16 @@ const RunBtn = () => {
 
   const btnHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
+
+    if (!isQueryValid(request)) {
+      dispatch(
+        setError({
+          status: 'CUSTOM_ERROR',
+          error: 'Invalid GraphQl operation',
+        }),
+      );
+      return;
+    }
 
     const names = getOperationsNames(request);
     setOperationNames(names);

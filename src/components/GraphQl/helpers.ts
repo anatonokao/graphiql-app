@@ -11,3 +11,12 @@ export const getOperationsNames = (request: string): string[] => {
         : 'Unnamed Operation',
     );
 };
+
+export const isQueryValid = (value: string) => {
+  try {
+    parse(value);
+    return true;
+  } catch {
+    return false;
+  }
+};
