@@ -29,6 +29,14 @@
   font-size: 1.2rem;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+}
+
 .separator {
   width: 5px;
   height: 100%;

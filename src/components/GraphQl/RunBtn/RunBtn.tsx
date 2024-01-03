@@ -3,11 +3,10 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import { setError, setResponse } from '@/store/GraphQl/graphqlSlice.ts';
 import { getOperationsNames } from '@/components/GraphQl/helpers.ts';
-
+import styles from './RunBtn.module.scss';
 const RunBtn = () => {
   const [operationsNames, setOperationNames] = useState<string[]>([]);
   const isSingleOperation = operationsNames.length <= 1;
-  console.log(isSingleOperation);
   const dispatch = useAppDispatch();
 
   const { apiUrl, request, headers, vars } = useAppSelector(
@@ -46,15 +45,24 @@ const RunBtn = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {isSingleOperation ? (
-        <button type="button" onClick={btnHandler} disabled={isFetching}>
+        <button
+          type="button"
+          onClick={btnHandler}
+          disabled={isFetching}
+          className={styles.runBtn}
+        >
           Run
         </button>
       ) : (
-        <div>
+        <div className={styles.btnsContainer}>
           {operationsNames.map((operation, index) => (
-            <button key={index} onClick={() => makeRequest(operation)}>
+            <button
+              key={index}
+              onClick={() => makeRequest(operation)}
+              className={styles.selectBtn}
+            >
               {operation}
             </button>
           ))}

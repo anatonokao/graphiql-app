@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+  height: 100%;
+}
+
+.runBtn {
+  @include base-link;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+}
+
+.btnsContainer {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: $clr-base-4;
+  border-radius: 10px;
+  border: 1px solid $clr-base-2;
+  .selectBtn {
+    @include base-link;
+    background-color: transparent;
+    font-size: 1.2rem;
+    padding: 20px 30px;
+  }
+}
