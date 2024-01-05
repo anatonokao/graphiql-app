@@ -35,3 +35,17 @@ body {
 ::-webkit-scrollbar-corner {
   background-color: transparent;
 }
+
+.successToast {
+  font-size: 1.3rem !important;
+  color: $clr-green !important;
+  background: $clr-base !important;
+  box-shadow: 0 0 7px $clr-green !important;
+}
+
+.errorToast {
+  font-size: 1.3rem !important;
+  color: $red-danger !important;
+  background: $clr-base !important;
+  box-shadow: 0 0 7px $red-danger !important;
+}

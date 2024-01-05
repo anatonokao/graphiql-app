@@ -14,6 +14,7 @@ import Prettifyer from '@/components/GraphQl/Prettifyer/Prettifyer.tsx';
 import { useAppSelector } from '@/store/hooks.ts';
 import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import Loader from '@/components/common/Loading/Loader/Loader.tsx';
+import { goToast } from '@/components/toast-helper.ts';
 
 const DesktopLayout: FC = () => {
   const [isDocPanelOpen, setIsDocPanelOpen] = useState(false);
@@ -29,6 +30,10 @@ const DesktopLayout: FC = () => {
   useEffect(() => {
     getSchema(apiUrl);
   }, [apiUrl, getSchema]);
+
+  useEffect(() => {
+    isError && goToast('Something went wrong!', 'error');
+  }, [isError]);
 
   const DocPanel = lazy(
     () => import('@/components/GraphQl/DocPanel/DocPanel.tsx'),
