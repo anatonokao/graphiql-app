@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.catImg {
+  width: 300px;
+  object-fit: contain;
+}
+
+.text {
+  @include subtitle;
+}
