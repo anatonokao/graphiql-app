@@ -7,6 +7,7 @@ import {
   isQueryValid,
 } from '@/components/GraphQl/helpers.ts';
 import styles from './RunBtn.module.scss';
+import { goToast } from '@/components/toast-helper.ts';
 const RunBtn = () => {
   const [operationsNames, setOperationNames] = useState<string[]>([]);
   const isSingleOperation = operationsNames.length <= 1;
@@ -16,7 +17,7 @@ const RunBtn = () => {
     (state) => state.graphqlSlice,
   );
   //
-  const [getData, { data, isFetching, error }] =
+  const [getData, { data, isFetching, error, isError }] =
     graphqlAPI.useLazyGetDataQuery();
 
   useEffect(() => {
@@ -24,9 +25,12 @@ const RunBtn = () => {
     dispatch(setError(error || null));
   }, [data, error, dispatch]);
 
+  useEffect(() => {
+    isError && goToast('Something Went Wrong!', 'error');
+  }, [isError]);
+
   const btnHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
-
     if (!isQueryValid(request)) {
       dispatch(
         setError({
@@ -34,6 +38,7 @@ const RunBtn = () => {
           error: 'Invalid GraphQl operation',
         }),
       );
+      goToast('Invalid GraphQl operation!', 'error');
       return;
     }
 

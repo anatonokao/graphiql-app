@@ -1,6 +1,11 @@
-import toast from 'react-hot-toast';
-
-export const goToast = (text: string, type: 'success' | 'error'): void => {
+import toast, { Renderable } from 'react-hot-toast';
+export const goToast = (
+  text: string,
+  type: 'success' | 'error' | 'custom',
+  className?: string,
+  icon?: Renderable,
+  duration?: number,
+): void => {
   switch (type) {
     case 'success':
       toast.success(text, {
@@ -16,6 +21,14 @@ export const goToast = (text: string, type: 'success' | 'error'): void => {
         duration: 3000,
         position: 'bottom-center',
         icon: '❌',
+      });
+      break;
+    case 'custom':
+      toast.success(text, {
+        className,
+        icon,
+        duration,
+        position: 'bottom-center',
       });
       break;
     default:

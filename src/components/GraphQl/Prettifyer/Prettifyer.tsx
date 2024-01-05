@@ -3,16 +3,22 @@ import styles from './Prettifyer.module.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setRequest } from '@/store/GraphQl/graphqlSlice.ts';
 import { isQueryValid } from '@/components/GraphQl/helpers.ts';
+import { goToast } from '@/components/toast-helper.ts';
+import AnimBroom from '@/components/GraphQl/Prettifyer/AnimBroom/AnimBroom.tsx';
 
 const Prettifyer = () => {
   const request = useAppSelector((state) => state.graphqlSlice.request);
   const dispatch = useAppDispatch();
 
   const onClickHandler = () => {
-    if (!isQueryValid(request)) return;
+    if (!isQueryValid(request)) {
+      goToast('Invalid GraphQl operation!', 'error');
+      return;
+    }
 
     const formattedRequest = prettify(request);
     dispatch(setRequest(formattedRequest));
+    goToast('All Clear!', 'custom', 'successToast', AnimBroom(), 3000);
   };
 
   function prettify(code: string) {
