@@ -24,23 +24,28 @@ const InputUrlApi: FC = () => {
 
   return (
     <div className={styles.container}>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="api url"
-        onChange={changeInputHandler}
-        value={inputValue}
-        disabled={!isInputEditable}
-      />
-      {isInputEditable ? (
-        <button className={styles.actionBtn} onClick={saveBtnHandler}>
-          Save
-        </button>
-      ) : (
-        <button className={styles.actionBtn} onClick={editBtnHandler}>
-          Edit
-        </button>
-      )}
+      <div className={styles.body}>
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="The base link to the GraphQL API"
+          onChange={changeInputHandler}
+          value={inputValue}
+          disabled={!isInputEditable}
+        />
+        {isInputEditable ? (
+          <button className={styles.actionBtn} onClick={saveBtnHandler}>
+            Save
+          </button>
+        ) : (
+          <button className={styles.actionBtn} onClick={editBtnHandler}>
+            Edit
+          </button>
+        )}
+      </div>
+      <div className={styles.caption}>
+        Attention: only APIs that support GraphQL
+      </div>
     </div>
   );
 };
