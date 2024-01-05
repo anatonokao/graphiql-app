@@ -57,17 +57,33 @@ const DocPanel: FC<DocPanelProps> = ({ schema }) => {
 
   const docTypes = graphqlSchema && getFields(graphqlSchema);
 
+  const [history, setHistory] = useState<Type[]>([]);
   const [currentType, setCurrentType] = useState<Type>();
 
   const onClickHandler = (fieldName: string) => {
     const type = docTypes?.find(
       (item) => item.name === fieldName.replace(/[\[\]!]/g, ''),
     );
+    type && setHistory((history) => [...history, type]);
     type && setCurrentType(type);
+  };
+
+  const onClickBackHandler = () => {
+    setCurrentType(history.at(-2));
+    history.length && setHistory((history) => history.slice(0, -1));
   };
 
   return (
     <div className={styles.container}>
+      {history.length > 0 && (
+        <button
+          type="button"
+          onClick={onClickBackHandler}
+          className={styles.backBtn}
+        >
+          Back
+        </button>
+      )}
       {schema ? (
         currentType ? (
           <div className={styles.typeContainer}>
