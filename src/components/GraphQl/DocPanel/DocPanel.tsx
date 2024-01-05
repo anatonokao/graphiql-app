@@ -2,6 +2,8 @@ import React, { FC, useState } from 'react';
 import { buildClientSchema, IntrospectionQuery } from 'graphql/utilities';
 import { getFields, Type } from '@/components/GraphQl/helpers.ts';
 import styles from './DocPanel.module.scss';
+import DocField from '@/components/GraphQl/DocPanel/DocField/DocField.tsx';
+import DocType from '@/components/GraphQl/DocPanel/DocType/DocType.tsx';
 
 type DocPanelProps = {
   schema: IntrospectionQuery | undefined;
@@ -77,12 +79,11 @@ const DocPanel: FC<DocPanelProps> = ({ schema }) => {
             </div>
             <div className={styles.fieldsContainer}>
               {currentType.fields?.map((field) => (
-                <button
-                  onClick={() => onClickHandler(field.type)}
+                <DocField
+                  field={field}
+                  onClickHandler={onClickHandler}
                   key={field.name}
-                >
-                  {field.name}
-                </button>
+                />
               ))}
             </div>
           </div>
@@ -91,12 +92,11 @@ const DocPanel: FC<DocPanelProps> = ({ schema }) => {
             {rootTypes.map(
               (type) =>
                 type.fields[0].name && (
-                  <button
-                    onClick={() => onClickHandler(type.name)}
+                  <DocType
+                    type={type}
+                    onClickHandler={onClickHandler}
                     key={type.name}
-                  >
-                    {type.name}
-                  </button>
+                  />
                 ),
             )}
           </div>
