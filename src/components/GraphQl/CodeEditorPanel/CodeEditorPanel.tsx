@@ -1,31 +1,27 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { editorTheme } from '../customTheme.ts';
 import styles from './CodeEditorPanel.module.scss';
-import { buildClientSchema } from 'graphql/utilities';
+import { buildClientSchema, IntrospectionQuery } from 'graphql/utilities';
 import { graphql } from 'cm6-graphql';
-import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setRequest } from '@/store/GraphQl/graphqlSlice.ts';
 
-const CodeEditorPanel: FC = () => {
+type CodeEditorPanel = {
+  schema: IntrospectionQuery | undefined;
+  isLoading: boolean;
+};
+
+const CodeEditorPanel: FC<CodeEditorPanel> = ({ isLoading, schema }) => {
   const dispatch = useAppDispatch();
 
-  const apiUrl = useAppSelector((state) => state.graphqlSlice.apiUrl);
-
-  const [getSchema, { data, isFetching }] = graphqlAPI.useLazyGetSchemaQuery();
-
   const code = useAppSelector((state) => state.graphqlSlice.request);
-
-  useEffect(() => {
-    getSchema(apiUrl);
-  }, [apiUrl, getSchema]);
 
   const changeHandler = (value: string) => {
     dispatch(setRequest(value));
   };
 
-  return isFetching || !data ? (
+  return isLoading || !schema ? (
     <div>loading</div>
   ) : (
     <section className={styles.editorContainer}>
@@ -35,7 +31,7 @@ const CodeEditorPanel: FC = () => {
         placeholder={'Write something...'}
         value={code}
         onChange={changeHandler}
-        extensions={graphql(buildClientSchema(data))}
+        extensions={graphql(buildClientSchema(schema))}
       />
     </section>
   );
