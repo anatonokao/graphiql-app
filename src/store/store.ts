@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI';
 import graphqlSlice from '@/store/GraphQl/graphqlSlice.ts';
+import authSlice from '@/store/Auth/authSlice.ts';
 
 const rootReducer = combineReducers({
+  authSlice,
   graphqlSlice,
   [graphqlAPI.reducerPath]: graphqlAPI.reducer,
 });

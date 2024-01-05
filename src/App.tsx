@@ -3,8 +3,28 @@ import { useState } from 'react';
 import './App.scss';
 import { NavLink } from 'react-router-dom';
 import reactLogo from './assets/react.svg';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/firebase.tsx';
+import { useAppDispatch } from '@/store/hooks.ts';
+import { setDataUser } from '@/store/Auth/authSlice.ts';
 
 function App() {
+  const dispatch = useAppDispatch();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      user.getIdToken().then((res) => {
+        dispatch(
+          setDataUser({
+            email: user.email || '',
+            token: res,
+            isAuth: true,
+          }),
+        );
+      });
+    } else {
+      dispatch(setDataUser({ email: '', token: '', isAuth: false }));
+    }
+  });
   const DEADLINE = new Date('2024-01-08T01:59:00');
   const [finishTime] = useState(DEADLINE.getTime());
   const [[diffDays, diffH, diffM, diffS], setDiff] = useState([0, 0, 0, 0]);
