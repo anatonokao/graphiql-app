@@ -6,6 +6,13 @@
   overflow: hidden;
 }
 
+.backBtn {
+  @include base-link;
+  margin-left: auto;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
 .typeContainer {
   margin-top: 20px;
   display: flex;

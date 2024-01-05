@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, lazy, Suspense, useEffect, useState } from 'react';
 import CodeEditorPanel from '@/components/GraphQl/CodeEditorPanel/CodeEditorPanel.tsx';
 import ResultPanel from '@/components/GraphQl/ResultPanel/ResultPanel.tsx';
 import styles from './DesktopLayout.module.scss';
@@ -10,7 +10,7 @@ import { TabList, TabPanel, Tabs, Tab } from 'react-tabs';
 import InputUrlApi from '@/components/GraphQl/InputUrlApi/InputUrlApi.tsx';
 import RunBtn from '@/components/GraphQl/RunBtn/RunBtn.tsx';
 import Prettifyer from '@/components/GraphQl/Prettifyer/Prettifyer.tsx';
-import DocPanel from '@/components/GraphQl/DocPanel/DocPanel.tsx';
+
 import { useAppSelector } from '@/store/hooks.ts';
 import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import Loader from '@/components/common/Loading/Loader/Loader.tsx';
@@ -29,6 +29,10 @@ const DesktopLayout: FC = () => {
   useEffect(() => {
     getSchema(apiUrl);
   }, [apiUrl, getSchema]);
+
+  const DocPanel = lazy(
+    () => import('@/components/GraphQl/DocPanel/DocPanel.tsx'),
+  );
 
   return (
     <>
@@ -58,19 +62,21 @@ const DesktopLayout: FC = () => {
               >
                 <img src="src/assets/doc-btn.svg" alt="docs" />
               </button>
-              <Panel
-                minSize={10}
-                maxSize={9999}
-                defaultSize={30}
-                className={styles.docPanel}
-                style={{ display: isDocPanelOpen ? 'flex' : 'none' }}
-              >
-                <DocPanel schema={data} />
-              </Panel>
-              <PanelResizeHandle
-                className={styles.separator}
-                style={{ display: isDocPanelOpen ? 'flex' : 'none' }}
-              />
+              {isDocPanelOpen && (
+                <>
+                  <Panel
+                    minSize={10}
+                    maxSize={9999}
+                    defaultSize={30}
+                    className={styles.docPanel}
+                  >
+                    <Suspense fallback={<Loader />}>
+                      <DocPanel schema={data} />
+                    </Suspense>
+                  </Panel>
+                  <PanelResizeHandle className={styles.separator} />
+                </>
+              )}
               <Panel minSize={30} maxSize={9999} className={styles.panel}>
                 <PanelGroup direction="vertical">
                   <Panel className={styles.panel}>
