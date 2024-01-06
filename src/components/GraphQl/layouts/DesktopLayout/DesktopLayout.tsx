@@ -5,7 +5,6 @@ import styles from './DesktopLayout.module.scss';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import VariablesPanel from '@/components/GraphQl/VariablesPanel/VariablesPanel.tsx';
 import HeadersPanel from '@/components/GraphQl/HeadersPanel/HeadersPanel.tsx';
-// import Tab from '@/components/GraphQl/TabsWrapper/Tab/Tab.tsx';
 import { TabList, TabPanel, Tabs, Tab } from 'react-tabs';
 import InputUrlApi from '@/components/GraphQl/InputUrlApi/InputUrlApi.tsx';
 import RunBtn from '@/components/GraphQl/RunBtn/RunBtn.tsx';

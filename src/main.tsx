@@ -11,8 +11,8 @@ import {
 } from 'react-router-dom';
 import { setupStore } from './store/store.ts';
 import { Provider } from 'react-redux';
-import DesktopLayout from './components/GraphQl/layouts/DesktopLayout/DesktopLayout.tsx';
 import StyleGuide from '@/components/StyleGuidePage/StyleGuide.tsx';
+import RootLayout from '@/components/GraphQl/layouts/RootLayout.tsx';
 
 const store = setupStore();
 
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route path="/" element={<div>main</div>} />
       <Route path="/auth" element={<div>Auth Page</div>} />
-      <Route path="/playground" element={<DesktopLayout />} />
+      <Route path="/playground" element={<RootLayout />} />
       <Route path="/styleguide" element={<StyleGuide />} />
     </Route>,
   ),

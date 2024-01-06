@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { getErrors } from '@/store/helpers.ts';
+import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
+import { goToast } from '@/components/toast-helper.ts';
 
 interface GraphqlState {
   apiUrl: string;
@@ -50,6 +52,29 @@ export const graphqlSlice = createSlice({
         state.error = getErrors(payload);
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      graphqlAPI.endpoints?.getData.matchFulfilled,
+      (state, action) => {
+        state.response = action.payload
+          ? JSON.stringify(action.payload, null, 2)
+          : '';
+        goToast('Request Successfully Completed!', 'success');
+      },
+    );
+    builder.addMatcher(
+      graphqlAPI.endpoints?.getData.matchRejected,
+      (state, action) => {
+        state.error = [];
+        const { payload } = action;
+        if (payload) {
+          state.response = JSON.stringify(payload, null, 2);
+          state.error = getErrors(payload);
+        }
+        goToast('Something Went Wrong!', 'error');
+      },
+    );
   },
 });
 

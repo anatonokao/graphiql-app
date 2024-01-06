@@ -6,14 +6,13 @@ import { json } from '@codemirror/lang-json';
 import { useAppSelector } from '@/store/hooks.ts';
 import { EditorView } from '@codemirror/view';
 const ResultPanel = () => {
-  const { response, error } = useAppSelector((state) => state.graphqlSlice);
-
+  const { response } = useAppSelector((state) => state.graphqlSlice);
   return (
     <section className={styles.resultContainer}>
       <CodeMirror
         theme={editorTheme()}
         spellCheck={true}
-        value={error[0] || response}
+        value={response}
         readOnly={true}
         extensions={[json(), EditorView.lineWrapping]}
       />
