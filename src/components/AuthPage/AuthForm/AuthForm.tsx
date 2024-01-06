@@ -46,9 +46,7 @@ const AuthForm = () => {
   });
   const onSubmitHandler = ({ email, password }: FormData) => {
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+      .then(() => {
         goToast('Welcome to the team', 'success');
       })
       .catch((error) => {

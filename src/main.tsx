@@ -21,8 +21,8 @@ const store = setupStore();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/">
-      <Route path="/" element={<App />} />
+    <Route path="/" element={<App />}>
+      <Route path="/" element={<div>Welcome</div>} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="/playground" element={<DesktopLayout />} />
