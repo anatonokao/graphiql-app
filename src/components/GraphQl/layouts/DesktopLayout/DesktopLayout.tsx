@@ -1,8 +1,13 @@
-import React, { FC, lazy, Suspense, useEffect, useState } from 'react';
+import React, { FC, lazy, Suspense, useEffect, useRef, useState } from 'react';
 import CodeEditorPanel from '@/components/GraphQl/CodeEditorPanel/CodeEditorPanel.tsx';
 import ResultPanel from '@/components/GraphQl/ResultPanel/ResultPanel.tsx';
 import styles from './DesktopLayout.module.scss';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import {
+  ImperativePanelHandle,
+  Panel,
+  PanelGroup,
+  PanelResizeHandle,
+} from 'react-resizable-panels';
 import VariablesPanel from '@/components/GraphQl/VariablesPanel/VariablesPanel.tsx';
 import HeadersPanel from '@/components/GraphQl/HeadersPanel/HeadersPanel.tsx';
 import { TabList, TabPanel, Tabs, Tab } from 'react-tabs';
@@ -17,12 +22,12 @@ import { goToast } from '@/components/toast-helper.ts';
 
 const DesktopLayout: FC = () => {
   const [isDocPanelOpen, setIsDocPanelOpen] = useState(false);
-  const toggleDoc = () => {
-    setIsDocPanelOpen((prevState) => !prevState);
-  };
-
+  const DocPanel = lazy(
+    () => import('@/components/GraphQl/DocPanel/DocPanel.tsx'),
+  );
+  const [isAdditionalEditorsOpen, setIsAdditionalEditorsOpen] = useState(true);
   const apiUrl = useAppSelector((state) => state.graphqlSlice.apiUrl);
-
+  const panels = useRef<ImperativePanelHandle>(null);
   const [getSchema, { data, isFetching, isError }] =
     graphqlAPI.useLazyGetSchemaQuery();
 
@@ -34,9 +39,18 @@ const DesktopLayout: FC = () => {
     isError && goToast('Something went wrong!', 'error');
   }, [isError]);
 
-  const DocPanel = lazy(
-    () => import('@/components/GraphQl/DocPanel/DocPanel.tsx'),
-  );
+  const toggleDoc = () => {
+    setIsDocPanelOpen((prevState) => !prevState);
+  };
+
+  const toggleAdditionalEditors = () => {
+    setIsAdditionalEditorsOpen((prevState) => !prevState);
+    if (isAdditionalEditorsOpen) {
+      panels.current?.collapse();
+    } else {
+      panels.current?.expand();
+    }
+  };
 
   return (
     <>
@@ -84,7 +98,6 @@ const DesktopLayout: FC = () => {
               )}
               <Panel
                 minSize={30}
-                maxSize={9999}
                 className={styles.panel}
                 id="graphiql-EditorsPanel"
                 order={2}
@@ -104,11 +117,19 @@ const DesktopLayout: FC = () => {
                     </div>
                     <CodeEditorPanel isLoading={isFetching} schema={data} />
                   </Panel>
-                  <PanelResizeHandle className={styles.horizontalSeparator} />
+                  <PanelResizeHandle
+                    className={styles.horizontalSeparator}
+                    hidden={!isAdditionalEditorsOpen}
+                  />
+                  <button type="button" onClick={toggleAdditionalEditors}>
+                    {isAdditionalEditorsOpen ? 'hide' : 'show'}
+                  </button>
                   <Panel
                     className={styles.panel}
                     order={2}
                     id="graphiql-VarsHeadersEditorsPanel"
+                    collapsible={true}
+                    ref={panels}
                   >
                     <Tabs className={styles.tabsWrapper}>
                       <TabList className={styles.tabsNav}>
@@ -138,7 +159,6 @@ const DesktopLayout: FC = () => {
               <PanelResizeHandle className={styles.separator} />
               <Panel
                 minSize={30}
-                maxSize={9999}
                 className={styles.panel}
                 id="graphiql-ResultPanel"
                 order={2}
