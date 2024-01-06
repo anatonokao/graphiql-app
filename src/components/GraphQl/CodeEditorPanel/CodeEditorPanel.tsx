@@ -14,14 +14,13 @@ type CodeEditorPanel = {
 
 const CodeEditorPanel: FC<CodeEditorPanel> = ({ isLoading, schema }) => {
   const dispatch = useAppDispatch();
-
   const code = useAppSelector((state) => state.graphqlSlice.request);
 
   const changeHandler = (value: string) => {
     dispatch(setRequest(value));
   };
 
-  return isLoading || !schema ? (
+  return isLoading ? (
     <div>loading</div>
   ) : (
     <section className={styles.editorContainer}>
@@ -31,7 +30,7 @@ const CodeEditorPanel: FC<CodeEditorPanel> = ({ isLoading, schema }) => {
         placeholder={'Write something...'}
         value={code}
         onChange={changeHandler}
-        extensions={graphql(buildClientSchema(schema))}
+        extensions={schema && graphql(buildClientSchema(schema))}
       />
     </section>
   );
