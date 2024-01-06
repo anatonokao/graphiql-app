@@ -16,6 +16,8 @@ const RootLayout = () => {
     return () => window.removeEventListener('resize', resizeHandler);
   }, [resizeHandler]);
 
+  resizeHandler();
+
   return isMobile ? <MobileLayout /> : <DesktopLayout />;
 };
 
