@@ -28,6 +28,14 @@ export const isQueryValid = (value: string) => {
   }
 };
 
+export const isJsonValid = (value: string) => {
+  try {
+    return JSON.parse(value);
+  } catch {
+    return false;
+  }
+};
+
 export const getFields = (schema: GraphQLSchema): Type[] => {
   const types = schema.getTypeMap();
   const filteredTypes = Object.values(types).filter(

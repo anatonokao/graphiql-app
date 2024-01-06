@@ -4,6 +4,7 @@ import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import { setError, setResponse } from '@/store/GraphQl/graphqlSlice.ts';
 import {
   getOperationsNames,
+  isJsonValid,
   isQueryValid,
 } from '@/components/GraphQl/helpers.ts';
 import styles from './RunBtn.module.scss';
@@ -56,8 +57,8 @@ const RunBtn = () => {
     getData({
       url: apiUrl,
       request,
-      headers: headers ? JSON.parse(headers) : {},
-      vars: vars ? JSON.parse(vars) : {},
+      headers: isJsonValid(headers) || {},
+      vars: isJsonValid(vars) || {},
       operationName,
     });
   };
