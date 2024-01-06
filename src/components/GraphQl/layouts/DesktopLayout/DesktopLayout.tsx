@@ -73,6 +73,8 @@ const DesktopLayout: FC = () => {
                     maxSize={9999}
                     defaultSize={30}
                     className={styles.docPanel}
+                    id="graphiql-docPanel"
+                    order={1}
                   >
                     <Suspense fallback={<Loader />}>
                       <DocPanel schema={data} />
@@ -81,9 +83,19 @@ const DesktopLayout: FC = () => {
                   <PanelResizeHandle className={styles.separator} />
                 </>
               )}
-              <Panel minSize={30} maxSize={9999} className={styles.panel}>
+              <Panel
+                minSize={30}
+                maxSize={9999}
+                className={styles.panel}
+                id="graphiql-EditorsPanel"
+                order={2}
+              >
                 <PanelGroup direction="vertical">
-                  <Panel className={styles.panel}>
+                  <Panel
+                    className={styles.panel}
+                    order={1}
+                    id="graphiql-CodeEditorPanel"
+                  >
                     <div className={styles.header}>
                       <h5 className={styles.panelTitle}>Operation</h5>
                       <div className={styles.headerRight}>
@@ -94,7 +106,11 @@ const DesktopLayout: FC = () => {
                     <CodeEditorPanel isLoading={isFetching} schema={data} />
                   </Panel>
                   <PanelResizeHandle className={styles.horizontalSeparator} />
-                  <Panel className={styles.panel}>
+                  <Panel
+                    className={styles.panel}
+                    order={2}
+                    id="graphiql-VarsHeadersEditorsPanel"
+                  >
                     <Tabs className={styles.tabsWrapper}>
                       <TabList className={styles.tabsNav}>
                         <Tab
@@ -121,7 +137,13 @@ const DesktopLayout: FC = () => {
                 </PanelGroup>
               </Panel>
               <PanelResizeHandle className={styles.separator} />
-              <Panel minSize={30} maxSize={9999} className={styles.panel}>
+              <Panel
+                minSize={30}
+                maxSize={9999}
+                className={styles.panel}
+                id="graphiql-ResultPanel"
+                order={2}
+              >
                 <div className={styles.header}>
                   <h5 className={styles.panelTitle}>Results</h5>
                 </div>

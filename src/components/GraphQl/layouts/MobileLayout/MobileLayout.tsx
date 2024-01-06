@@ -2,7 +2,6 @@ import React, { FC, lazy, Suspense, useEffect, useState } from 'react';
 import CodeEditorPanel from '@/components/GraphQl/CodeEditorPanel/CodeEditorPanel.tsx';
 import ResultPanel from '@/components/GraphQl/ResultPanel/ResultPanel.tsx';
 import styles from './MobileLayout.module.scss';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import VariablesPanel from '@/components/GraphQl/VariablesPanel/VariablesPanel.tsx';
 import HeadersPanel from '@/components/GraphQl/HeadersPanel/HeadersPanel.tsx';
 import { TabList, TabPanel, Tabs, Tab } from 'react-tabs';
@@ -56,61 +55,7 @@ const MobileLayout: FC = () => {
               </div>
             </div>
           ) : (
-            <PanelGroup direction="vertical">
-              <Panel minSize={400} maxSize={9999} className={styles.panel}>
-                <PanelGroup direction="vertical">
-                  <Panel className={styles.panel}>
-                    <div className={styles.header}>
-                      <h5 className={styles.panelTitle}>Operation</h5>
-                      <div className={styles.headerRight}>
-                        <Prettifyer />
-                        <RunBtn />
-                      </div>
-                    </div>
-                    <CodeEditorPanel isLoading={isFetching} schema={data} />
-                  </Panel>
-                  <PanelResizeHandle className={styles.horizontalSeparator} />
-                  <Panel className={styles.panel}>
-                    <Tabs className={styles.tabsWrapper}>
-                      <TabList className={styles.tabsNav}>
-                        <Tab
-                          className={styles.tabBtn}
-                          selectedClassName={styles.tabBtnActive}
-                        >
-                          Vars
-                        </Tab>
-                        <Tab
-                          className={styles.tabBtn}
-                          selectedClassName={styles.tabBtnActive}
-                        >
-                          Headers
-                        </Tab>
-                        <Tab
-                          className={styles.tabBtn}
-                          selectedClassName={styles.tabBtnActive}
-                        >
-                          Results
-                        </Tab>
-                      </TabList>
-                      <TabPanel selectedClassName={styles.tab}>
-                        <VariablesPanel />
-                      </TabPanel>
-                      <TabPanel selectedClassName={styles.tab}>
-                        <HeadersPanel />
-                      </TabPanel>
-                      <TabPanel selectedClassName={styles.tab}>
-                        <ResultPanel />
-                      </TabPanel>
-                    </Tabs>
-                  </Panel>
-                </PanelGroup>
-              </Panel>
-              <PanelResizeHandle className={styles.horizontalSeparator} />
-              <Panel minSize={30} maxSize={9999} className={styles.panel}>
-                <div className={styles.header}>
-                  <h5 className={styles.panelTitle}>Results</h5>
-                </div>
-              </Panel>
+            <div className={styles.ideContainer}>
               <button
                 type="button"
                 onClick={toggleDoc}
@@ -118,23 +63,70 @@ const MobileLayout: FC = () => {
                 title="Docs"
               >
                 <img src="src/assets/doc-btn.svg" alt="docs" />
+                Docs
               </button>
+
               {isDocPanelOpen && (
                 <>
-                  <Panel
-                    minSize={10}
-                    maxSize={9999}
-                    defaultSize={30}
-                    className={styles.docPanel}
-                  >
+                  <div className={styles.docPanel}>
+                    <button
+                      type="button"
+                      onClick={toggleDoc}
+                      className={styles.closeBtn}
+                      title="Docs"
+                    >
+                      ✖️
+                    </button>
                     <Suspense fallback={<Loader />}>
                       <DocPanel schema={data} />
                     </Suspense>
-                  </Panel>
-                  <PanelResizeHandle className={styles.horizontalSeparator} />
+                  </div>
                 </>
               )}
-            </PanelGroup>
+              <div className={styles.panel}>
+                <div className={styles.header}>
+                  <h5 className={styles.panelTitle}>Operation</h5>
+                  <div className={styles.headerRight}>
+                    <Prettifyer />
+                    <RunBtn />
+                  </div>
+                </div>
+                <CodeEditorPanel isLoading={isFetching} schema={data} />
+              </div>
+              <div className={styles.panel}>
+                <Tabs className={styles.tabsWrapper}>
+                  <TabList className={styles.tabsNav}>
+                    <Tab
+                      className={styles.tabBtn}
+                      selectedClassName={styles.tabBtnActive}
+                    >
+                      Results
+                    </Tab>
+                    <Tab
+                      className={styles.tabBtn}
+                      selectedClassName={styles.tabBtnActive}
+                    >
+                      Vars
+                    </Tab>
+                    <Tab
+                      className={styles.tabBtn}
+                      selectedClassName={styles.tabBtnActive}
+                    >
+                      Headers
+                    </Tab>
+                  </TabList>
+                  <TabPanel selectedClassName={styles.tab}>
+                    <ResultPanel />
+                  </TabPanel>
+                  <TabPanel selectedClassName={styles.tab}>
+                    <VariablesPanel />
+                  </TabPanel>
+                  <TabPanel selectedClassName={styles.tab}>
+                    <HeadersPanel />
+                  </TabPanel>
+                </Tabs>
+              </div>
+            </div>
           )
         ) : (
           <Loader />

@@ -1,41 +1,65 @@
 .ide {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  flex-grow: 1;
-  gap: 10px;
-}
-
-.panel {
-  display: flex;
-  flex-direction: column;
   height: 100%;
   width: 100%;
-  background-color: $clr-base;
-  border-radius: 5px;
+  gap: 10px;
+  padding: 10px;
 }
 
-.docToggler {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  border-radius: 10px;
-  position: relative;
-  z-index: 0;
-  filter: contrast(0.4);
-  transition: $transition;
-  &:hover {
-    filter: contrast(1);
+.ideContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  & > *:not(:last-child) {
+    margin-bottom: 10px;
   }
 }
 
+.panel {
+  background-color: $clr-base;
+  border-radius: 5px;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.docToggler {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include base-button;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 10px;
+  z-index: 0;
+  transition: $transition;
+  img {
+    margin-right: 10px;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  font-size: 1.5rem;
+  left: 10px;
+  top: 10px;
+}
+
 .docPanel {
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  padding-top: 20px;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: $clr-base;
+  z-index: 1000;
 }
 
 .panelTitle {
@@ -57,27 +81,6 @@
   gap: 5px;
 }
 
-.separator {
-  width: 5px;
-  height: 100%;
-  background-color: $bg-color;
-  transition: $transition;
-}
-
-.horizontalSeparator {
-  width: 100%;
-  height: 5px;
-  background-color: $bg-color;
-  transition: $transition;
-}
-
-.separator:hover,
-.separator:active,
-.horizontalSeparator:hover,
-.horizontalSeparator:active {
-  background-color: $blue-neon-glow;
-}
-
 .tabsWrapper {
   display: flex;
   flex-direction: column;
@@ -89,16 +92,16 @@
 .tabsNav {
   display: flex;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .tabBtn {
   @include neon-button-active;
   width: 100%;
-  margin-bottom: 10px;
   box-shadow: none;
   padding: 10px 20px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.8rem;
   border-top: 1px solid transparent;
   border-left: 1px solid transparent;
   border-right: 1px solid transparent;
@@ -115,13 +118,13 @@
 }
 
 .tabBtnActive {
-  pointer-events: none;
   @include neon-button-active;
+  pointer-events: none;
   border-bottom: 1px solid transparent;
   box-shadow: none;
   padding: 10px 20px;
   border-radius: 0;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .tab {
