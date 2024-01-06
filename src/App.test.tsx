@@ -12,6 +12,6 @@ describe('app', () => {
       </BrowserRouter>,
     );
 
-    expect(await screen.findByText('ДО ДЕДЛАЙНА')).toBeInTheDocument();
+    expect(await screen.findByText('GraphiQL')).toBeInTheDocument();
   });
 });

@@ -27,6 +27,7 @@ export default defineConfig({
     exclude: [...configDefaults.exclude, 'packages/template/*'],
     coverage: {
       provider: 'v8',
+      all: true,
     },
   },
 });

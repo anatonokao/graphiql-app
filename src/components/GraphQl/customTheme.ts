@@ -1,28 +1,24 @@
 import { Extension } from '@codemirror/state';
 import { tags as t } from '@lezer/highlight';
-import { createTheme, CreateThemeOptions } from '@uiw/codemirror-themes';
+import { createTheme } from '@uiw/codemirror-themes';
 
-export const editorTheme = (
-  options?: Partial<CreateThemeOptions>,
-): Extension => {
-  const { settings = {} } = options || {};
+export const editorTheme = (): Extension => {
   return createTheme({
     theme: 'dark',
     settings: {
       background: 'transparent',
-      caret: '#6bc2fc',
-      foreground: '#9293a0',
+      caret: '#759cff',
+      foreground: '#d3a6ff',
       gutterBackground: 'transparent',
-      selection: '#303244',
-      selectionMatch: '#303244',
+      selection: 'rgba(178,117,255,0.4)',
+      selectionMatch: 'rgba(81,69,117,0.58)',
       lineHighlight: 'transparent',
       gutterForeground: '#9293a0',
-      ...settings,
     },
     styles: [
-      { tag: t.keyword, color: '#bb9af7' },
-      { tag: [t.name, t.deleted, t.character, t.macroName], color: '#c0caf5' },
-      { tag: [t.propertyName], color: '#6bc2fc' },
+      { tag: t.keyword, color: '#f79a9a' },
+      { tag: [t.name, t.deleted, t.character, t.macroName], color: '#f5d4c0' },
+      { tag: [t.propertyName], color: '#53a3ff' },
       {
         tag: [
           t.processingInstruction,
@@ -30,7 +26,7 @@ export const editorTheme = (
           t.inserted,
           t.special(t.string),
         ],
-        color: '#9ece6a',
+        color: '#6ace81',
       },
       { tag: [t.function(t.variableName), t.labelName], color: '#6bc2fc' },
       {
@@ -59,7 +55,7 @@ export const editorTheme = (
       { tag: t.link, textDecoration: 'underline' },
       { tag: t.heading, fontWeight: 'bold', color: '#89ddff' },
       { tag: [t.atom, t.bool, t.special(t.variableName)], color: '#c0caf5' },
-      { tag: t.invalid, color: '#ff5370' },
+      { tag: t.invalid, color: '#ff537b' },
       { tag: t.strikethrough, textDecoration: 'line-through' },
     ],
   });
