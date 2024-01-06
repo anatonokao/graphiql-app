@@ -1,7 +1,7 @@
 import React from 'react';
-import { json } from '@codemirror/lang-json';
 import { editorTheme } from '@/components/GraphQl/customTheme.ts';
 import CodeMirror from '@uiw/react-codemirror';
+import { langs } from '@uiw/codemirror-extensions-langs';
 import styles from './VariablesPanel.module.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setVars } from '@/store/GraphQl/graphqlSlice.ts';
@@ -19,9 +19,9 @@ const VariablesPanel = () => {
       <CodeMirror
         theme={editorTheme()}
         onChange={onChangeHandler}
-        placeholder="JSON format"
+        placeholder="JSON Format"
         spellCheck={true}
-        extensions={[json()]}
+        extensions={[langs.json()]}
         value={vars}
       />
     </section>
