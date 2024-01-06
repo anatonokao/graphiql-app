@@ -9,7 +9,6 @@ import AnimBroom from '@/components/GraphQl/Prettifyer/AnimBroom/AnimBroom.tsx';
 const Prettifyer = () => {
   const request = useAppSelector((state) => state.graphqlSlice.request);
   const dispatch = useAppDispatch();
-
   const onClickHandler = () => {
     if (!isQueryValid(request)) {
       goToast('Invalid GraphQl operation!', 'error');
