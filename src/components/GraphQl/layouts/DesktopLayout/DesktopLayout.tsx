@@ -40,7 +40,6 @@ const DesktopLayout: FC = () => {
 
   return (
     <>
-      <div>Header</div>
       <div className={styles.ide}>
         <InputUrlApi />
         {!isFetching ? (

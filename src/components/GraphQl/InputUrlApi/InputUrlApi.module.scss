@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 5px;
 }
 
 .body {
@@ -35,6 +34,7 @@
   font-size: 1.1rem;
   font-weight: 400;
   padding: 5px 10px;
+  margin-left: 10px;
   &:hover {
     box-shadow: none;
   }
@@ -56,5 +56,6 @@
   .actionBtn {
     padding: 10px;
     width: 100%;
+    margin-left: 0;
   }
 }
