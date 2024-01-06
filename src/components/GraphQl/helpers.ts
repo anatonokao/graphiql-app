@@ -22,6 +22,15 @@ export const getOperationsNames = (request: string): string[] => {
   }
 };
 
+export const isQueryValid = (value: string) => {
+  try {
+    parse(value);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const isJsonValid = (value: string) => {
   try {
     return JSON.parse(value);
