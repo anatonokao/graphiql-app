@@ -121,8 +121,12 @@ const DesktopLayout: FC = () => {
                     className={styles.horizontalSeparator}
                     hidden={!isAdditionalEditorsOpen}
                   />
-                  <button type="button" onClick={toggleAdditionalEditors}>
-                    {isAdditionalEditorsOpen ? 'hide' : 'show'}
+                  <button
+                    type="button"
+                    onClick={toggleAdditionalEditors}
+                    className={styles.tabsToggler}
+                  >
+                    {isAdditionalEditorsOpen ? '˅' : '˄'}
                   </button>
                   <Panel
                     className={styles.panel}

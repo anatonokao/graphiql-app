@@ -8,6 +8,7 @@
   flex-grow: 1;
   overflow: hidden;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .s {
@@ -85,6 +86,13 @@
 .horizontalSeparator:hover,
 .horizontalSeparator:active {
   background-color: $blue-neon-glow;
+}
+
+.tabsToggler {
+  @include base-link;
+  font-size: 1.5rem;
+  padding: 10px;
+  margin-left: auto;
 }
 
 .tabsWrapper {
