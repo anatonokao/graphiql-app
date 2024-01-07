@@ -1,4 +1,4 @@
-import React, { FC, lazy, Suspense, useEffect, useState } from 'react';
+import React, { FC, lazy, Suspense, useState } from 'react';
 import CodeEditorPanel from '@/components/GraphQl/CodeEditorPanel/CodeEditorPanel.tsx';
 import ResultPanel from '@/components/GraphQl/ResultPanel/ResultPanel.tsx';
 import styles from './MobileLayout.module.scss';
@@ -8,30 +8,20 @@ import { TabList, TabPanel, Tabs, Tab } from 'react-tabs';
 import InputUrlApi from '@/components/GraphQl/InputUrlApi/InputUrlApi.tsx';
 import RunBtn from '@/components/GraphQl/RunBtn/RunBtn.tsx';
 import Prettifyer from '@/components/GraphQl/Prettifyer/Prettifyer.tsx';
-
-import { useAppSelector } from '@/store/hooks.ts';
-import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import Loader from '@/components/common/Loading/Loader/Loader.tsx';
-import { goToast } from '@/components/toast-helper.ts';
+import { IntrospectionQuery } from 'graphql/utilities';
 
-const MobileLayout: FC = () => {
+type MobileLayoutProps = {
+  data: IntrospectionQuery | undefined;
+  isFetching: boolean;
+  isError: boolean;
+};
+
+const MobileLayout: FC<MobileLayoutProps> = ({ data, isFetching, isError }) => {
   const [isDocPanelOpen, setIsDocPanelOpen] = useState(false);
   const toggleDoc = () => {
     setIsDocPanelOpen((prevState) => !prevState);
   };
-
-  const apiUrl = useAppSelector((state) => state.graphqlSlice.apiUrl);
-
-  const [getSchema, { data, isFetching, isError }] =
-    graphqlAPI.useLazyGetSchemaQuery();
-
-  useEffect(() => {
-    getSchema(apiUrl);
-  }, [apiUrl, getSchema]);
-
-  useEffect(() => {
-    isError && goToast('Something went wrong!', 'error');
-  }, [isError]);
 
   const DocPanel = lazy(
     () => import('@/components/GraphQl/DocPanel/DocPanel.tsx'),
