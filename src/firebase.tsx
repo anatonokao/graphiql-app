@@ -1,5 +1,6 @@
 import { getAuth, signOut } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import { goToast } from '@/components/toast-helper.ts';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBVx_G7Eoc32axMPSwFmBVPvBVTm7bLOm4',
@@ -13,5 +14,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const logOut = () => {
-  signOut(auth);
+  signOut(auth).catch(() => {
+    goToast('Something Went Wrong!', 'error');
+  });
 };
