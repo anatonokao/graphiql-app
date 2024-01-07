@@ -4,8 +4,17 @@ import DesktopLayout from '@/components/GraphQl/layouts/DesktopLayout/DesktopLay
 import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import { goToast } from '@/components/toast-helper.ts';
 import { useAppSelector } from '@/store/hooks.ts';
+import { useNavigate } from 'react-router-dom';
 
 const RootLayout = () => {
+  const navigate = useNavigate();
+  const { isAuth } = useAppSelector((state) => state.authSlice);
+  useEffect(() => {
+    if (!isAuth) {
+      navigate('/');
+    }
+  }, [isAuth]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const apiUrl = useAppSelector((state) => state.graphqlSlice.apiUrl);
 
   const [getSchema, { data, isFetching, isError }] =

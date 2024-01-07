@@ -8,6 +8,10 @@ import { setDataUser } from '@/store/Auth/authSlice.ts';
 import { User } from 'firebase/auth';
 import Header from '@/components/header/Header.tsx';
 import Footer from '@/components/footer/Footer.tsx';
+import Loader from '@/components/common/Loading/Loader/Loader.tsx';
+import { goToast } from '@/components/toast-helper.ts';
+import { Toaster } from 'react-hot-toast';
+
 
 function App() {
   const checkAuthUser = async (user: User | null): Promise<void> => {
@@ -30,15 +34,24 @@ function App() {
   };
 
   const dispatch = useAppDispatch();
-  useAuthState(auth, {
+  const [, loading, error] = useAuthState(auth, {
     onUserChanged: checkAuthUser,
   });
 
+  error && goToast('Something went wrong! You need login', 'error');
+
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Header />
+          <Outlet />
+          <Footer />
+          <Toaster />
+        </>
+      )}
     </>
   );
 }

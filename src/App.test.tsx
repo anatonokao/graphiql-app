@@ -11,14 +11,14 @@ describe('app', () => {
   test('app render', async () => {
     render(
       <BrowserRouter>
-        <LocalizationProvider>
-          <Provider store={setupStore()}>
+        <Provider store={setupStore()}>
+          <LocalizationProvider>
             <App />
-          </Provider>
-        </LocalizationProvider>
+          </LocalizationProvider>
+        </Provider>
       </BrowserRouter>,
     );
 
-    expect(await screen.findByText('Home')).toBeInTheDocument();
+    expect(await screen.findByText('Darya')).toBeInTheDocument();
   });
 });

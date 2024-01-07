@@ -16,12 +16,19 @@ type Header = {
 
 type WelcomePage = {
   titleProject: string;
-  textProject: string;
+  subtitleAboutProject: string;
+  descriptionAboutProject: string;
+  keyFuturesProject: {
+    title: string;
+    text: string;
+  }[];
+  endingAboutProject: string;
   titleAboutUs: string;
-  textPerson1: string;
-  textPerson2: string;
-  textPerson3: string;
+  daryaDesc: { fullName: string; desc: string; role: string };
+  alexanderDesc: { fullName: string; desc: string; role: string };
+  valeriyDesc: { fullName: string; desc: string; role: string };
   titleAboutCourse: string;
+  textAboutCourse: string;
 };
 
 type AuthPage = {

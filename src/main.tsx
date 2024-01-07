@@ -16,6 +16,7 @@ import StyleGuide from '@/components/StyleGuidePage/StyleGuide.tsx';
 import AuthPage from '@/components/AuthPage/AuthPage.tsx';
 import RegistrationPage from '@/components/RegistrationPage/RegistrationPage.tsx';
 import RootLayout from '@/components/GraphQl/layouts/RootLayout.tsx';
+import WelcomePage from '@/components/welcome-page/WelcomePage.tsx';
 import NotFoundPage from '@/components/NotFoundPage/NotFoundPage.tsx';
 
 const store = setupStore();
@@ -28,7 +29,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="/playground" element={<RootLayout />} />
       <Route path="/styleguide" element={<StyleGuide />} />
-      <Route path="*" element={<NotFoundPage />}></Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Route>,
   ),
 );

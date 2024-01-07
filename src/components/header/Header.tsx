@@ -5,10 +5,12 @@ import { NavLink } from 'react-router-dom';
 import { useLocalization } from '../localization/LocalizationContext';
 import burgerMenu from '../../assets/burger_menu.png';
 import closeIcon from '../../assets/close_icon.png';
+import { useAppSelector } from '@/store/hooks.ts';
+import { logOut } from '@/firebase.tsx';
 
 function Header() {
   const [isSticky, setSticky] = useState(false);
-  const [isAuth] = useState(true);
+  const { isAuth } = useAppSelector((state) => state.authSlice);
   const { texts, switchLanguage } = useLocalization();
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -34,6 +36,10 @@ function Header() {
     setMenuOpen((prev) => !prev);
   };
 
+  const onClickLogoutHandler = () => {
+    logOut();
+  };
+
   return (
     <>
       <div
@@ -48,16 +54,17 @@ function Header() {
           className="custom-select"
           defaultValue="en"
           onChange={handleLanguageChange}
+          data-testid="langSelector"
         >
           <option value="en">EN</option>
           <option value="ru">RU</option>
         </select>
-        {isAuth ? (
+        {!isAuth ? (
           <>
             <NavLink className="nav-link" to="/auth">
               {texts.header.signIn}
             </NavLink>
-            <NavLink className="nav-link" to="/auth">
+            <NavLink className="nav-link" to="/register">
               {texts.header.signUp}
             </NavLink>
           </>
@@ -66,9 +73,13 @@ function Header() {
             <NavLink className="nav-link" to="/playground">
               {texts.header.graphiql}
             </NavLink>
-            <NavLink className="nav-link" to="/playground">
+            <button
+              className="nav-link"
+              type="button"
+              onClick={onClickLogoutHandler}
+            >
               {texts.header.exit}
-            </NavLink>
+            </button>
           </>
         )}
       </div>
