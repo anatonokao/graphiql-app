@@ -6,8 +6,10 @@ import {
   isJsonValid,
 } from '@/components/GraphQl/graphql-helpers.ts';
 import styles from './RunBtn.module.scss';
+import { useLocalization } from '@/components/localization/LocalizationContext';
 const RunBtn = () => {
   const [operationsNames, setOperationNames] = useState<string[]>([]);
+  const { texts } = useLocalization();
   const isSingleOperation = operationsNames.length <= 1;
 
   const { apiUrl, request, headers, vars } = useAppSelector(
@@ -48,7 +50,7 @@ const RunBtn = () => {
           disabled={isFetching}
           className={styles.runBtn}
         >
-          Run
+          {texts.graphQLPage.startBtn}
         </button>
       ) : (
         <div className={styles.btnsContainer}>
