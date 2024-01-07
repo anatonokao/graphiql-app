@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Header from './Header';
+import Header from '@/components/header/Header.tsx';
 import { LocalizationProvider } from '../localization/LocalizationContext';
 
 describe('header', () => {

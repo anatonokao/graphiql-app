@@ -42,7 +42,7 @@ function Header() {
         }`}
       >
         <NavLink className="nav-link" to="/">
-          {texts.home}
+          {texts.header.home}
         </NavLink>
         <select
           className="custom-select"
@@ -55,19 +55,19 @@ function Header() {
         {isAuth ? (
           <>
             <NavLink className="nav-link" to="/auth">
-              {texts.signIn}
+              {texts.header.signIn}
             </NavLink>
             <NavLink className="nav-link" to="/auth">
-              {texts.signUp}
+              {texts.header.signUp}
             </NavLink>
           </>
         ) : (
           <>
             <NavLink className="nav-link" to="/playground">
-              {texts.graphiql}
+              {texts.header.graphiql}
             </NavLink>
             <NavLink className="nav-link" to="/playground">
-              {texts.exit}
+              {texts.header.exit}
             </NavLink>
           </>
         )}

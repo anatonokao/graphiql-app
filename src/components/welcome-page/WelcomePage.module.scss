@@ -1,4 +1,4 @@
-.about-container {
+.aboutContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,25 @@
   padding: 0 20px;
 }
 
-.about-us-container {
+.aboutProject {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1280px;
+  padding: 25px 17px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.aboutHeader {
+  display: flex;
+  & > p {
+    @include subtitle;
+    font-size: 1.5rem;
+  }
+}
+
+.aboutUsContainer {
   display: flex;
   flex-direction: row;
   gap: 5px;
@@ -28,33 +46,22 @@
   margin-bottom: 20px;
 }
 
-.about-title {
+.aboutTitle {
   @include title;
   margin-bottom: 25px;
 }
 
-.developers__description {
+.developersDesc {
   @include subtitle;
   text-align: justify;
   padding: 25px;
 }
 
-.welcome-page {
+.welcomePage {
   width: 100%;
   background-color: $bg-color;
 }
-
-.about-project {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1280px;
-  padding: 25px 17px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.about-course {
+.aboutCourse {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,16 +70,16 @@
 }
 
 @media (max-width: 800px) {
-  .about-us-container {
+  .aboutUsContainer {
     flex-direction: column;
     align-items: center;
   }
 
-  .about-title {
+  .aboutTitle {
     font-size: 2rem;
   }
 
-  .developers__description {
+  .developersDesc {
     font-size: 1.5rem;
   }
 

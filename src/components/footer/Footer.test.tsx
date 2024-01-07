@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { LocalizationProvider } from '../localization/LocalizationContext';
-import Footer from './Footer';
+import Footer from '@/components/footer/Footer.tsx';
 
 describe('footer', () => {
   test('footer render', async () => {
