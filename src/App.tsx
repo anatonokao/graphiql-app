@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.scss';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { auth } from '@/firebase.tsx';
 import { useAppDispatch } from '@/store/hooks.ts';
 import { setDataUser } from '@/store/Auth/authSlice.ts';
 import { User } from 'firebase/auth';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 
 function App() {
   const checkAuthUser = async (user: User | null): Promise<void> => {
@@ -34,12 +36,9 @@ function App() {
 
   return (
     <>
-      <div className="nav" style={{ position: 'relative' }}>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/auth">Auth</NavLink>
-        <NavLink to="/playground">GraphiQL</NavLink>
-      </div>
+      <Header />
       <Outlet />
+      <Footer />
     </>
   );
 }

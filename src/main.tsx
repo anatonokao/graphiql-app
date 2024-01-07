@@ -16,13 +16,14 @@ import StyleGuide from '@/components/StyleGuidePage/StyleGuide.tsx';
 import AuthPage from '@/components/AuthPage/AuthPage.tsx';
 import RegistrationPage from '@/components/RegistrationPage/RegistrationPage.tsx';
 import RootLayout from "@/components/GraphQl/layouts/RootLayout.tsx";
+import WelcomePage from './components/welcome-page/WelcomePage.tsx';
 
 const store = setupStore();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/" element={<div>welcome</div>} />
+      <Route path="/" element={< WelcomePage />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="/playground" element={<RootLayout />} />
