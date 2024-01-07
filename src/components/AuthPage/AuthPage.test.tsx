@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import { setupStore } from '@/store/store.ts';
 import { getAuth } from 'firebase/auth';
 import toast, { Toaster } from 'react-hot-toast';
-
 vi.mock('firebase/auth');
 window.matchMedia =
   window.matchMedia ||
@@ -29,7 +28,7 @@ window.matchMedia =
         .fn()
         .mockReturnValue(Promise.resolve());
 
-      const spyOnToast = vi.spyOn(toast, 'success');
+      const spyOnToastForLogin = vi.spyOn(toast, 'success');
       render(
         <MemoryRouter>
           <Provider store={setupStore()}>
@@ -49,10 +48,10 @@ window.matchMedia =
         'myLogin@en',
         'myPassword',
       );
-      expect(spyOnToast).toBeCalled();
+      expect(spyOnToastForLogin).toBeCalled();
     });
   });
-  describe('AuthPage', () => {
+  describe('auth page', () => {
     test('auth page render', async () => {
       render(
         <BrowserRouter>
@@ -137,8 +136,6 @@ window.matchMedia =
         'myLogin@en',
         'myPassword',
       );
-      console.log(screen.debug());
-
       expect(spyOnToastError).toBeCalled();
     });
   });

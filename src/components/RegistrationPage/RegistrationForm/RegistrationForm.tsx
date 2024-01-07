@@ -32,9 +32,7 @@ const RegistrationForm = () => {
   });
   const onSubmitHandler = ({ email, password }: FormData) => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+      .then(() => {
         goToast('Account is created', 'success');
       })
       .catch((error) => {
