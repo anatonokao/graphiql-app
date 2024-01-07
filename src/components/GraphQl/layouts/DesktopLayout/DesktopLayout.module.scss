@@ -152,14 +152,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  max-width: 1000px;
   height: 100%;
+  padding: 30px;
   gap: 20px;
 }
 
 .errorTitle {
   @include title;
   font-size: 2rem;
+  text-align: center;
 }
 
 .errorText {
