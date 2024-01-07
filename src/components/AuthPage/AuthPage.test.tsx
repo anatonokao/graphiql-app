@@ -122,7 +122,7 @@ window.matchMedia =
       firebase.getAuth = vi.fn();
       firebase.signInWithEmailAndPassword = vi
         .fn()
-        .mockReturnValue(Promise.reject({ code: 'auth/invalid-email' }));
+        .mockRejectedValue({ code: 'auth/invalid-email' });
 
       const spyOnToastError = vi.spyOn(toast, 'error');
       render(
