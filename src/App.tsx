@@ -6,8 +6,8 @@ import { auth } from '@/firebase.tsx';
 import { useAppDispatch } from '@/store/hooks.ts';
 import { setDataUser } from '@/store/Auth/authSlice.ts';
 import { User } from 'firebase/auth';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
+import Header from '@/components/header/Header.tsx';
+import Footer from '@/components/footer/Footer.tsx';
 
 function App() {
   const checkAuthUser = async (user: User | null): Promise<void> => {
