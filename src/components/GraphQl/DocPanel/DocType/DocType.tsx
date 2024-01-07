@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './DocType.module.scss';
-import { Type } from '@/components/GraphQl/helpers.ts';
+import { Type } from '@/components/GraphQl/graphql-helpers.ts';
 
 type DocTypeProps = {
   type: Type;

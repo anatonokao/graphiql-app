@@ -4,7 +4,7 @@ import {
   getOperationsNames,
   isJsonValid,
   isQueryValid,
-} from '@/components/GraphQl/helpers.ts';
+} from '@/components/GraphQl/graphql-helpers.ts';
 import { buildClientSchema, IntrospectionQuery } from 'graphql/utilities';
 
 describe('GraphQl Helpers', () => {

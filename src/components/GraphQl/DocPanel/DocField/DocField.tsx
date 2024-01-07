@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styles from './DocField.module.scss';
-import { Field } from '@/components/GraphQl/helpers.ts';
+import { Field } from '@/components/GraphQl/graphql-helpers.ts';
 
 type DocFieldProps = {
   field: Field;

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { getErrors } from '@/store/helpers.ts';
+import { getErrors } from '@/store/store-helpers.ts';
 import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import { goToast } from '@/components/toast-helper.ts';
 

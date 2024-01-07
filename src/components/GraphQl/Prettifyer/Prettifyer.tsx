@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Prettifyer.module.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setRequest } from '@/store/GraphQl/graphqlSlice.ts';
-import { isQueryValid } from '@/components/GraphQl/helpers.ts';
+import { isQueryValid } from '@/components/GraphQl/graphql-helpers.ts';
 import { goToast } from '@/components/toast-helper.ts';
 import AnimBroom from '@/components/GraphQl/Prettifyer/AnimBroom/AnimBroom.tsx';
 

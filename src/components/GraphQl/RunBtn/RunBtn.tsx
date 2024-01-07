@@ -4,7 +4,7 @@ import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import {
   getOperationsNames,
   isJsonValid,
-} from '@/components/GraphQl/helpers.ts';
+} from '@/components/GraphQl/graphql-helpers.ts';
 import styles from './RunBtn.module.scss';
 const RunBtn = () => {
   const [operationsNames, setOperationNames] = useState<string[]>([]);

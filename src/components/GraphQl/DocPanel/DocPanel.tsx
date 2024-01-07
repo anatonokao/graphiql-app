@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { buildClientSchema, IntrospectionQuery } from 'graphql/utilities';
-import { getFields, Type } from '@/components/GraphQl/helpers.ts';
+import { getFields, Type } from '@/components/GraphQl/graphql-helpers.ts';
 import styles from './DocPanel.module.scss';
 import DocField from '@/components/GraphQl/DocPanel/DocField/DocField.tsx';
 import DocType from '@/components/GraphQl/DocPanel/DocType/DocType.tsx';
