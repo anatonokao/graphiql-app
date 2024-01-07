@@ -22,24 +22,31 @@ const Prettifyer = () => {
 
   function prettify(code: string) {
     const ugly = code.replace(/\s+/g, ' ');
-    const lines = ugly.split(/([{}])/);
+    const lines = ugly.split(/([{()}])/);
 
     let deep = 0;
     let result = '';
 
     lines.forEach((line, index, arr) => {
       const trimmedLine = line.trim();
-
+      console.log(trimmedLine);
       if (trimmedLine === '{') {
         result += ` ${trimmedLine}\n`;
         deep++;
       } else if (trimmedLine === '}') {
         deep = Math.max(0, deep - 1);
         result += `${'  '.repeat(deep)}${trimmedLine}\n`;
+      } else if (trimmedLine === '(' || trimmedLine === ')') {
+        result += ` ${trimmedLine} `;
       } else if (trimmedLine !== '') {
         const fields = trimmedLine.split(/\s+/);
         fields.forEach((field, fieldIndex) => {
           if (fieldIndex === fields.length - 1 && arr[index + 1] === '{') {
+            result += `${'  '.repeat(deep)}${field}`;
+          } else if (arr[index - 1] === '(') {
+            console.log(field);
+            result += `${field}`;
+          } else if (arr[index + 1] === '(' || arr[index + 1] === ')') {
             result += `${'  '.repeat(deep)}${field}`;
           } else {
             result += `${'  '.repeat(deep)}${field}\n`;
@@ -47,7 +54,6 @@ const Prettifyer = () => {
         });
       }
     });
-
     return result;
   }
 
