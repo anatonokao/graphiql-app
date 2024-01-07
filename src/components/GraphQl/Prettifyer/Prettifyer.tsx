@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './Prettifyer.module.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setRequest } from '@/store/GraphQl/graphqlSlice.ts';
@@ -6,7 +6,7 @@ import { isQueryValid } from '@/components/GraphQl/graphql-helpers.ts';
 import { goToast } from '@/components/toast-helper.ts';
 import AnimBroom from '@/components/GraphQl/Prettifyer/AnimBroom/AnimBroom.tsx';
 
-const Prettifyer = () => {
+const Prettifyer: FC = () => {
   const request = useAppSelector((state) => state.graphqlSlice.request);
   const dispatch = useAppDispatch();
   const onClickHandler = () => {
@@ -29,7 +29,6 @@ const Prettifyer = () => {
 
     lines.forEach((line, index, arr) => {
       const trimmedLine = line.trim();
-      console.log(trimmedLine);
       if (trimmedLine === '{') {
         result += ` ${trimmedLine}\n`;
         deep++;
@@ -44,7 +43,6 @@ const Prettifyer = () => {
           if (fieldIndex === fields.length - 1 && arr[index + 1] === '{') {
             result += `${'  '.repeat(deep)}${field}`;
           } else if (arr[index - 1] === '(') {
-            console.log(field);
             result += `${field}`;
           } else if (arr[index + 1] === '(' || arr[index + 1] === ')') {
             result += `${'  '.repeat(deep)}${field}`;
