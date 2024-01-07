@@ -6,7 +6,7 @@ const RootLayout = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const resizeHandler = useCallback(() => {
-    window.outerWidth < 765
+    window.innerWidth < 765
       ? !isMobile && setIsMobile(true)
       : isMobile && setIsMobile(false);
   }, [isMobile]);

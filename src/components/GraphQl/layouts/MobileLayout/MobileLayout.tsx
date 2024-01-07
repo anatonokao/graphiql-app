@@ -39,7 +39,7 @@ const MobileLayout: FC = () => {
 
   return (
     <>
-      <div className={styles.ide}>
+      <div className={styles.ide} data-testid="MobileLayout">
         <InputUrlApi />
         {!isFetching ? (
           isError ? (

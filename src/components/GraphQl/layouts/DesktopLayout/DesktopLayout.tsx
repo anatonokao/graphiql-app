@@ -54,7 +54,7 @@ const DesktopLayout: FC = () => {
 
   return (
     <>
-      <div className={styles.ide}>
+      <div className={styles.ide} data-testid="DesktopLayout">
         <InputUrlApi />
         {!isFetching ? (
           isError ? (
