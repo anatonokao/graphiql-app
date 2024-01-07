@@ -21,9 +21,7 @@ const DocField: FC<DocFieldProps> = ({ field, onClickHandler }) => {
                 <button
                   type="button"
                   className={styles.fieldBtn}
-                  onClick={
-                    onClickHandler ? () => onClickHandler(arg.type) : () => {}
-                  }
+                  onClick={() => onClickHandler(arg.type)}
                 >
                   {arg.type}
                 </button>
