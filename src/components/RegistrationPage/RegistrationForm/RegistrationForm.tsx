@@ -6,11 +6,12 @@ import FormField from '@/components/common/FormField.tsx';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { ref } from 'yup';
-import { FormData, goToast } from '@/components/AuthPage/AuthForm/AuthForm.tsx';
+import { FormData } from '@/components/AuthPage/AuthForm/AuthForm.tsx';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase.tsx';
 import { Toaster } from 'react-hot-toast';
 import { useAppSelector } from '@/store/hooks.ts';
+import { goToast } from '@/components/toast-helper.ts';
 
 const schemaRegistration = yup.object().shape({
   email: yup.string().email().required('email is a required field'),

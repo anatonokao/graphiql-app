@@ -7,8 +7,8 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import FormField from '@/components/common/FormField.tsx';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase.tsx';
-import toast, { Toaster } from 'react-hot-toast';
 import { useAppSelector } from '@/store/hooks.ts';
+import { goToast } from '@/components/toast-helper.ts';
 
 const schemaAuth = yup.object().shape({
   email: yup.string().email().required('email is a required field'),
@@ -28,21 +28,6 @@ export type FormData = {
   email: string;
   password: string;
   confirmPassword?: string;
-};
-
-export const goToast = (text: string, type: string) => {
-  switch (type) {
-    case 'success':
-      toast.success(`${text}`, {
-        className: classes.toast,
-      });
-      break;
-    case 'error':
-      toast.error(`${text}`, {
-        className: classes.toastError,
-      });
-      break;
-  }
 };
 
 const AuthForm = () => {
@@ -123,7 +108,6 @@ const AuthForm = () => {
           Register
         </NavLink>
       </p>
-      <Toaster />
     </form>
   );
 };
