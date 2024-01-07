@@ -33,22 +33,22 @@ function WelcomePage() {
             }}
           ></div>
           <MouseParallaxContainer className={s.parallaxContainer}>
-            <MouseParallaxChild factorX={0.5} factorY={0.5} inverted={true}>
+            <MouseParallaxChild factorX={0.05} factorY={0.2} inverted={true}>
               <img src={react} alt="icon" className={s.parallaxImg} />
             </MouseParallaxChild>
-            <MouseParallaxChild factorX={0.5} factorY={0.5} inverted={false}>
+            <MouseParallaxChild factorX={0.05} factorY={0.2} inverted={false}>
               <img src={redux} alt="icon" className={s.parallaxImg} />
             </MouseParallaxChild>
-            <MouseParallaxChild factorX={0.5} factorY={0.5} inverted={true}>
+            <MouseParallaxChild factorX={0.05} factorY={0.2} inverted={true}>
               <img src={graphql} alt="icon" className={s.parallaxImg} />
             </MouseParallaxChild>
-            <MouseParallaxChild factorX={0.5} factorY={0.5} inverted={false}>
+            <MouseParallaxChild factorX={0.05} factorY={0.2} inverted={false}>
               <img src={typescript} alt="icon" className={s.parallaxImg} />
             </MouseParallaxChild>
-            <MouseParallaxChild factorX={0.5} factorY={0.5} inverted={true}>
+            <MouseParallaxChild factorX={0.05} factorY={0.2} inverted={true}>
               <img src={sass} alt="icon" className={s.parallaxImg} />
             </MouseParallaxChild>
-            <MouseParallaxChild factorX={0.5} factorY={0.5} inverted={false}>
+            <MouseParallaxChild factorX={0.05} factorY={0.2} inverted={false}>
               <img src={html} alt="icon" className={s.parallaxImg} />
             </MouseParallaxChild>
           </MouseParallaxContainer>

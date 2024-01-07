@@ -146,5 +146,43 @@ window.matchMedia =
       );
       expect(spyOnToastError).toBeCalled();
     });
+
+    test('error', async () => {
+      const firebase = await import('firebase/auth');
+      firebase.getAuth = vi.fn();
+      firebase.signInWithEmailAndPassword = vi
+        .fn()
+        .mockReturnValue(Promise.reject({ code: 'auth/user-disabled' }));
+
+      const spyOnToastError = vi.spyOn(toast, 'error');
+      render(
+        <MemoryRouter>
+          <Provider store={setupStore()}>
+            <AuthPage />
+            <Toaster />
+          </Provider>
+        </MemoryRouter>,
+      );
+      const inputEmail = screen.getByPlaceholderText(/email/i);
+      const inputPassword = screen.getByPlaceholderText(/password/i);
+      await userEvent.type(inputEmail, 'myLogin@en');
+      await userEvent.type(inputPassword, 'myPassword1!');
+      const btn = screen.getByRole('button');
+      await userEvent.click(btn);
+      expect(firebase.signInWithEmailAndPassword).toHaveBeenCalledWith(
+        getAuth(),
+        'myLogin@en',
+        'myPassword1!',
+      );
+      expect(spyOnToastError).toBeCalledWith(
+        'This email address is disabled by the administrator',
+        {
+          className: 'errorToast',
+          duration: 3000,
+          icon: '❌',
+          position: 'bottom-center',
+        },
+      );
+    });
   });
 }

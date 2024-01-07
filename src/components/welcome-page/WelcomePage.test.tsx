@@ -15,6 +15,6 @@ describe('welcome-page', () => {
       </BrowserRouter>,
     );
 
-    expect(await screen.findByText('About Course')).toBeInTheDocument();
+    expect(await screen.findByText('About Project')).toBeInTheDocument();
   });
 });

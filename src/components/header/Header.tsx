@@ -54,6 +54,7 @@ function Header() {
           className="custom-select"
           defaultValue="en"
           onChange={handleLanguageChange}
+          data-testid="langSelector"
         >
           <option value="en">EN</option>
           <option value="ru">RU</option>
