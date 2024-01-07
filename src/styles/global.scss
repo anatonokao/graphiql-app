@@ -7,7 +7,45 @@
 
 body {
   color: $base-text-clr;
-  background-color: #191921;
+  background-color: $bg-color;
   font-weight: 400;
   font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $clr-scroll transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $clr-scroll;
+  border-radius: 100px;
+  border: 3px solid transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.successToast {
+  font-size: 1.3rem !important;
+  color: $clr-green !important;
+  background: $clr-base !important;
+  box-shadow: 0 0 7px $clr-green !important;
+}
+
+.errorToast {
+  font-size: 1.3rem !important;
+  color: $red-danger !important;
+  background: $clr-base !important;
+  box-shadow: 0 0 7px $red-danger !important;
 }

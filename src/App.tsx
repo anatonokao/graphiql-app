@@ -2,7 +2,6 @@ import React from 'react';
 import './App.scss';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { NavLink, Outlet } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
 import { auth } from '@/firebase.tsx';
 import { useAppDispatch } from '@/store/hooks.ts';
 import { setDataUser } from '@/store/Auth/authSlice.ts';
@@ -36,7 +35,6 @@ function App() {
   return (
     <>
       <div className="nav" style={{ position: 'relative' }}>
-        <img src={reactLogo} alt="logo" />
         <NavLink to="/">Home</NavLink>
         <NavLink to="/auth">Auth</NavLink>
         <NavLink to="/playground">GraphiQL</NavLink>

@@ -1,0 +1,66 @@
+.container {
+  position: relative;
+  height: 100%;
+}
+
+.runBtn {
+  @include base-link;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid $buttons-and-links;
+  }
+  &:disabled {
+    pointer-events: none;
+    background: linear-gradient(
+      -45deg,
+      transparent 0%,
+      transparent 40%,
+      $clr-base-2 50%,
+      transparent 60%,
+      transparent 100%
+    );
+    background-size: 200% 200%;
+    animation: loading-gradient infinite 2s ease;
+  }
+}
+
+.btnsContainer {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: $clr-base-4;
+  border-radius: 10px;
+  border: 1px solid $clr-base-2;
+  padding: 5px 10px;
+
+  .selectBtn {
+    @include base-link;
+    background-color: transparent;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:not(:last-child) {
+      border-bottom: 1px solid $clr-base-2;
+    }
+  }
+}
+
+@keyframes loading-gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

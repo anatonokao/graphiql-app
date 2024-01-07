@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
 import './styles/global.scss';
 import './styles/codemirror.scss';
 import App from './App.tsx';
@@ -16,6 +15,7 @@ import { LocalizationProvider } from './components/localization/LocalizationCont
 import StyleGuide from '@/components/StyleGuidePage/StyleGuide.tsx';
 import AuthPage from '@/components/AuthPage/AuthPage.tsx';
 import RegistrationPage from '@/components/RegistrationPage/RegistrationPage.tsx';
+import RootLayout from "@/components/GraphQl/layouts/RootLayout.tsx";
 
 const store = setupStore();
 
@@ -25,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<div>welcome</div>} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/register" element={<RegistrationPage />} />
+      <Route path="/playground" element={<RootLayout />} />
       <Route path="/styleguide" element={<StyleGuide />} />
     </Route>,
   ),

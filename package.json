@@ -10,7 +10,7 @@
     "format": "prettier --write",
     "preview": "vite preview",
     "prepare": "husky install",
-    "pre-commit": "lint-staged",
+    "pre-push": "lint-staged",
     "test": "vitest run",
     "coverage": "vitest run --coverage"
   },
@@ -23,6 +23,8 @@
     "@codemirror/view": "^6.22.3",
     "@hookform/resolvers": "^3.3.3",
     "@reduxjs/toolkit": "^2.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@uiw/codemirror-extensions-langs": "^4.21.21",
     "@uiw/codemirror-themes": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "axios": "^1.6.2",
@@ -65,12 +67,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vitest": "^1.0.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm run test"
-    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [

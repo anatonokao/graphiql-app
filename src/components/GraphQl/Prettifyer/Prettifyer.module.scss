@@ -1,0 +1,12 @@
+.btn {
+  height: 45px;
+  width: 45px;
+  padding: 5px;
+  //background-color: $clr-base-2;
+  border-radius: 10px;
+  transition: $transition;
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid $buttons-and-links;
+  }
+}
