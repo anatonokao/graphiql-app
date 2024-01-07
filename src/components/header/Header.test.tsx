@@ -10,7 +10,7 @@ describe('header', () => {
     render(
       <BrowserRouter>
         <LocalizationProvider>
-            <Header />
+          <Header />
         </LocalizationProvider>
       </BrowserRouter>,
     );

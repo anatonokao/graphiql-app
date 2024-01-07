@@ -10,7 +10,7 @@ describe('welcome-page', () => {
     render(
       <BrowserRouter>
         <LocalizationProvider>
-            <WelcomePage />
+          <WelcomePage />
         </LocalizationProvider>
       </BrowserRouter>,
     );

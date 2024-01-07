@@ -1,16 +1,47 @@
 import React from 'react';
 import './App.scss';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
-import WelcomePage from './components/welcome-page/WelcomePage';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { NavLink, Outlet } from 'react-router-dom';
+import reactLogo from './assets/react.svg';
+import { auth } from '@/firebase.tsx';
+import { useAppDispatch } from '@/store/hooks.ts';
+import { setDataUser } from '@/store/Auth/authSlice.ts';
+import { User } from 'firebase/auth';
 
 function App() {
+  const checkAuthUser = async (user: User | null): Promise<void> => {
+    const currentUser = user;
+    if (!currentUser) {
+      dispatch(
+        setDataUser({
+          email: '',
+          isAuth: false,
+        }),
+      );
+    } else {
+      dispatch(
+        setDataUser({
+          email: currentUser.email || '',
+          isAuth: true,
+        }),
+      );
+    }
+  };
+
+  const dispatch = useAppDispatch();
+  useAuthState(auth, {
+    onUserChanged: checkAuthUser,
+  });
 
   return (
     <>
-        <Header />
-        <WelcomePage />
-        <Footer />
+      <div className="nav" style={{ position: 'relative' }}>
+        <img src={reactLogo} alt="logo" />
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/auth">Auth</NavLink>
+        <NavLink to="/playground">GraphiQL</NavLink>
+      </div>
+      <Outlet />
     </>
   );
 }

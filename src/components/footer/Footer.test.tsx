@@ -10,7 +10,7 @@ describe('footer', () => {
     render(
       <BrowserRouter>
         <LocalizationProvider>
-            <Footer />
+          <Footer />
         </LocalizationProvider>
       </BrowserRouter>,
     );
