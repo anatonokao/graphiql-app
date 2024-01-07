@@ -11,9 +11,11 @@ import Footer from '@/components/footer/Footer.tsx';
 import Loader from '@/components/common/Loading/Loader/Loader.tsx';
 import { goToast } from '@/components/toast-helper.ts';
 import { Toaster } from 'react-hot-toast';
-
+import { useLocalization } from '@/components/localization/LocalizationContext.tsx';
 
 function App() {
+  const { texts } = useLocalization();
+
   const checkAuthUser = async (user: User | null): Promise<void> => {
     const currentUser = user;
     if (!currentUser) {
@@ -38,7 +40,7 @@ function App() {
     onUserChanged: checkAuthUser,
   });
 
-  error && goToast('Something went wrong! You need login', 'error');
+  error && goToast(texts.errorLogin, 'error');
 
   return (
     <>

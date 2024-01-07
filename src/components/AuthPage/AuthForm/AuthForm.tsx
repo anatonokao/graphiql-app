@@ -28,17 +28,17 @@ const AuthForm = () => {
   }, [isAuth]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const schemaAuth = yup.object().shape({
-    email: yup.string().email(`${texts.authPage.errorEmailInput}`).required('email is a required field'),
+    email: yup
+      .string()
+      .email(`${texts.authPage.errorEmailInput}`)
+      .required(texts.authPage.errorEmailRequired),
     password: yup
       .string()
-      .required('password is a required field')
+      .required(texts.authPage.errorPasswordRequired)
       .matches(/[A-Z]/, `${texts.authPage.errorUppercase}`)
       .matches(/[a-z]/, `${texts.authPage.errorLowercase}`)
       .matches(/[1-9]/, `${texts.authPage.errorDigit}`)
-      .matches(
-        /[!@#$%^&*()\-_=+{};:,<.>]/,
-        `${texts.authPage.errorSpecial}`,
-      )
+      .matches(/[!@#$%^&*()\-_=+{};:,<.>]/, `${texts.authPage.errorSpecial}`)
       .min(8),
   });
 
@@ -64,19 +64,13 @@ const AuthForm = () => {
             goToast(`${texts.authPage.errorEmail}`, 'error');
             break;
           case 'auth/user-disabled':
-            goToast(
-              `${texts.authPage.errorUserDisabled}`,
-              'error',
-            );
+            goToast(`${texts.authPage.errorUserDisabled}`, 'error');
             break;
           case 'auth/user-not-found':
-            goToast(`${texts.authPage.erroruserNotFound}`, 'error');
+            goToast(`${texts.authPage.errorUserNotFound}`, 'error');
             break;
           case 'auth/wrong-password':
-            goToast(
-              `${texts.authPage.errorWrongPassword}`,
-              'error',
-            );
+            goToast(`${texts.authPage.errorWrongPassword}`, 'error');
             break;
           default:
             goToast(`${texts.authPage.errorInvalid}`, 'error');
@@ -103,12 +97,12 @@ const AuthForm = () => {
         />
       </div>
       <button disabled={!isValid} className={classes.button} type="submit">
-      {texts.authPage.loginBtn}
+        {texts.authPage.loginBtn}
       </button>
       <p className={classes.text}>
-      {texts.authPage.loginText}
+        {texts.authPage.loginText}
         <NavLink className={classes.link} to="/register">
-        {texts.authPage.registerLink}
+          {texts.authPage.registerLink}
         </NavLink>
       </p>
     </form>

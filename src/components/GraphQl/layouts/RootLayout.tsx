@@ -5,8 +5,11 @@ import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
 import { goToast } from '@/components/toast-helper.ts';
 import { useAppSelector } from '@/store/hooks.ts';
 import { useNavigate } from 'react-router-dom';
+import { useLocalization } from '@/components/localization/LocalizationContext.tsx';
 
 const RootLayout = () => {
+  const { texts } = useLocalization();
+
   const navigate = useNavigate();
   const { isAuth } = useAppSelector((state) => state.authSlice);
   useEffect(() => {
@@ -25,8 +28,8 @@ const RootLayout = () => {
   }, [apiUrl, getSchema]);
 
   useEffect(() => {
-    isError && goToast('Something went wrong!', 'error');
-  }, [isError]);
+    isError && goToast(texts.graphQLPage.getSchemaError, 'error');
+  }, [isError]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [isMobile, setIsMobile] = useState(false);
 
