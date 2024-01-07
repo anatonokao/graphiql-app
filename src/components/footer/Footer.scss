@@ -1,0 +1,45 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 130px;
+    width: 100%;
+    background-color: #41455e;
+    padding: 10px 20px;
+}
+
+.footer__logo {
+    width: 150px;
+    transition: 0.5s;
+
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+
+.github {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.github__img {
+    height: 30px;
+    width: 30px;
+}
+
+.year {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #9293a0;
+}
+
+@media (max-width: 450px) {
+
+    .footer {
+        flex-direction: column;
+        height: 210px;
+    }
+}
