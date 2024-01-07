@@ -72,6 +72,7 @@ const DesktopLayout: FC<DesktopLayoutProps> = ({
                 onClick={toggleDoc}
                 className={styles.docToggler}
                 title="Docs"
+                data-testid="DesktopLayout-DocToggler"
               >
                 <img src="src/assets/doc-btn.svg" alt="docs" />
               </button>
@@ -121,6 +122,7 @@ const DesktopLayout: FC<DesktopLayoutProps> = ({
                     type="button"
                     onClick={toggleAdditionalEditors}
                     className={styles.tabsToggler}
+                    data-testid="DesktopLayout-AdditionalEditorsToggler"
                   >
                     {isAdditionalEditorsOpen ? '˅' : '˄'}
                   </button>

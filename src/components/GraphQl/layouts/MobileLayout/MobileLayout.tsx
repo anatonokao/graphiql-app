@@ -51,6 +51,7 @@ const MobileLayout: FC<MobileLayoutProps> = ({ data, isFetching, isError }) => {
                 onClick={toggleDoc}
                 className={styles.docToggler}
                 title="Docs"
+                data-testid="MobileLayout-DocToggler"
               >
                 <img src="src/assets/doc-btn.svg" alt="docs" />
                 Docs
