@@ -1,4 +1,12 @@
 export const mocks = {
+  graphqlState: {
+    apiUrl: '',
+    request: '',
+    error: [],
+    response: '',
+    vars: '',
+    headers: '',
+  },
   graphQLSchema: {
     __schema: {
       queryType: {
