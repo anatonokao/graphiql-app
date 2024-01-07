@@ -43,7 +43,7 @@ const AuthForm = () => {
   }, [isAuth]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const schemaAuth = yup.object().shape({
-    email: yup.string().email().required('email is a required field'),
+    email: yup.string().email(`${texts.authPage.errorEmailInput}`).required('email is a required field'),
     password: yup
       .string()
       .required('password is a required field')

@@ -40,6 +40,8 @@ const dataEn: Texts = {
     errorLowercase: 'at least one lowercase required',
     errorDigit: 'at least one digit required',
     errorSpecial: 'at least one special character required',
+
+    errorEmailInput: 'email must be a valid email',
   },
   registerPage: {
     registerTitle: 'Create Account',

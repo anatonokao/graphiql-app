@@ -40,6 +40,8 @@ const dataRu: Texts = {
     errorLowercase: 'требуется хотя бы одна строчная буква',
     errorDigit: 'требуется хотя бы одна цифра',
     errorSpecial: 'требуется хотя бы один специальный символ',
+
+    errorEmailInput: 'невалидный адрес электронной почты',
   },
   registerPage: {
     registerTitle: 'Зарегистрироваться',

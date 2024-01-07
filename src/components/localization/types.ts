@@ -43,6 +43,8 @@ type AuthPage = {
   errorLowercase: string;
   errorDigit: string;
   errorSpecial: string;
+
+  errorEmailInput: string;
 }
 
 type RegisterPage = {
