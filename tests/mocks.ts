@@ -1953,4 +1953,14 @@ export const mocks = {
       ],
     },
   },
+  ErrorFromApi: {
+    status: 400,
+    data: {
+      errors: [
+        {
+          message: 'GraphQL Error: Document does not contain any operations',
+        },
+      ],
+    },
+  },
 };
