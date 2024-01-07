@@ -12,6 +12,7 @@ import Loader from '@/components/common/Loading/Loader/Loader.tsx';
 import { goToast } from '@/components/toast-helper.ts';
 import { Toaster } from 'react-hot-toast';
 
+
 function App() {
   const checkAuthUser = async (user: User | null): Promise<void> => {
     const currentUser = user;

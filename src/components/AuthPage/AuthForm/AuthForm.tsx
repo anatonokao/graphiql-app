@@ -9,21 +9,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase.tsx';
 import { useAppSelector } from '@/store/hooks.ts';
 import { goToast } from '@/components/toast-helper.ts';
+import { useLocalization } from '@/components/localization/LocalizationContext';
 
-const schemaAuth = yup.object().shape({
-  email: yup.string().email().required('email is a required field'),
-  password: yup
-    .string()
-    .required('password is a required field')
-    .matches(/[A-Z]/, 'at least one uppercase required')
-    .matches(/[a-z]/, 'at least one lowercase required')
-    .matches(/[1-9]/, 'at least one digit required')
-    .matches(
-      /[!@#$%^&*()\-_=+{};:,<.>]/,
-      'at least one special character required',
-    )
-    .min(8),
-});
 export type FormData = {
   email: string;
   password: string;
@@ -33,11 +20,27 @@ export type FormData = {
 const AuthForm = () => {
   const navigate = useNavigate();
   const { isAuth } = useAppSelector((state) => state.authSlice);
+  const { texts } = useLocalization();
   useEffect(() => {
     if (isAuth) {
       navigate('/playground');
     }
   }, [isAuth]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const schemaAuth = yup.object().shape({
+    email: yup.string().email(`${texts.authPage.errorEmailInput}`).required('email is a required field'),
+    password: yup
+      .string()
+      .required('password is a required field')
+      .matches(/[A-Z]/, `${texts.authPage.errorUppercase}`)
+      .matches(/[a-z]/, `${texts.authPage.errorLowercase}`)
+      .matches(/[1-9]/, `${texts.authPage.errorDigit}`)
+      .matches(
+        /[!@#$%^&*()\-_=+{};:,<.>]/,
+        `${texts.authPage.errorSpecial}`,
+      )
+      .min(8),
+  });
 
   const {
     register,
@@ -51,32 +54,32 @@ const AuthForm = () => {
   const onSubmitHandler = ({ email, password }: FormData) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        goToast('Welcome to the team', 'success');
+        goToast(`${texts.authPage.authSuccess}`, 'success');
         navigate('/playground');
       })
       .catch((error) => {
         const errorCode = error.code;
         switch (errorCode) {
           case 'auth/invalid-email':
-            goToast('This email address is invalid', 'error');
+            goToast(`${texts.authPage.errorEmail}`, 'error');
             break;
           case 'auth/user-disabled':
             goToast(
-              'This email address is disabled by the administrator',
+              `${texts.authPage.errorUserDisabled}`,
               'error',
             );
             break;
           case 'auth/user-not-found':
-            goToast('This email address is not registered', 'error');
+            goToast(`${texts.authPage.erroruserNotFound}`, 'error');
             break;
           case 'auth/wrong-password':
             goToast(
-              'The password is invalid or the user does not have a password',
+              `${texts.authPage.errorWrongPassword}`,
               'error',
             );
             break;
           default:
-            goToast('Email address or password is invalid', 'error');
+            goToast(`${texts.authPage.errorInvalid}`, 'error');
             break;
         }
       });
@@ -84,28 +87,28 @@ const AuthForm = () => {
   };
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmitHandler)}>
-      <h2>Login to account</h2>
+      <h2>{texts.authPage.loginTitle}</h2>
       <div className={classes.inputs}>
         <FormField
           type={'email'}
-          placeholder={'email'}
+          placeholder={texts.authPage.email}
           register={{ ...register('email') }}
           errors={errors.email}
         />
         <FormField
           type={'password'}
-          placeholder={'password'}
+          placeholder={texts.authPage.password}
           register={{ ...register('password') }}
           errors={errors.password}
         />
       </div>
       <button disabled={!isValid} className={classes.button} type="submit">
-        login
+      {texts.authPage.loginBtn}
       </button>
       <p className={classes.text}>
-        don&apos;t have an account yet?
+      {texts.authPage.loginText}
         <NavLink className={classes.link} to="/register">
-          Register
+        {texts.authPage.registerLink}
         </NavLink>
       </p>
     </form>

@@ -95,7 +95,7 @@ describe('registration page', () => {
     firebase.getAuth = vi.fn();
     firebase.createUserWithEmailAndPassword = vi
       .fn()
-      .mockReturnValue(Promise.reject({ code: 'auth/email-already-in-use' }));
+      .mockRejectedValue({ code: 'auth/email-already-in-use' });
 
     const spyOnToastError = vi.spyOn(toast, 'error');
     render(

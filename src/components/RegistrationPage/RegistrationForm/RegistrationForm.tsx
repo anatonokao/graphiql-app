@@ -12,29 +12,32 @@ import { auth } from '@/firebase.tsx';
 import { Toaster } from 'react-hot-toast';
 import { useAppSelector } from '@/store/hooks.ts';
 import { goToast } from '@/components/toast-helper.ts';
-
-const schemaRegistration = yup.object().shape({
-  email: yup.string().email().required('email is a required field'),
-  password: yup
-    .string()
-    .required('password is a required field')
-    .matches(/[A-Z]/, 'at least one uppercase required')
-    .matches(/[a-z]/, 'at least one lowercase required')
-    .matches(/[1-9]/, 'at least one digit required')
-    .matches(
-      /[!@#$%^&*()\-_=+{};:,<.>]/,
-      'at least one special character required',
-    )
-    .min(8),
-  confirmPassword: yup
-    .string()
-    .oneOf([ref('password')], 'password fields must match')
-    .required('confirm password is a required field'),
-});
+import { useLocalization } from '@/components/localization/LocalizationContext';
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
   const { isAuth } = useAppSelector((state) => state.authSlice);
+  const { texts } = useLocalization();
+
+  const schemaRegistration = yup.object().shape({
+    email: yup.string().email(`${texts.authPage.errorEmailInput}`).required('email is a required field'),
+    password: yup
+      .string()
+      .required('password is a required field')
+      .matches(/[A-Z]/,  `${texts.authPage.errorUppercase}`)
+      .matches(/[a-z]/, `${texts.authPage.errorLowercase}`)
+      .matches(/[1-9]/, `${texts.authPage.errorDigit}`)
+      .matches(
+        /[!@#$%^&*()\-_=+{};:,<.>]/,
+        `${texts.authPage.errorSpecial}`,
+      )
+      .min(8),
+    confirmPassword: yup
+      .string()
+      .oneOf([ref('password')], `${texts.registerPage.errorConfirmPassword}`)
+      .required('confirm password is a required field'),
+  });
+
   useEffect(() => {
     if (isAuth) {
       navigate('/playground');
@@ -52,7 +55,7 @@ const RegistrationForm = () => {
   const onSubmitHandler = ({ email, password }: FormData) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        goToast('Account is created', 'success');
+        goToast(`${texts.registerPage.registerSuccess}`, 'success');
         navigate('/playground');
       })
       .catch((error) => {
@@ -60,19 +63,19 @@ const RegistrationForm = () => {
         const errorMessage = error.message;
         switch (errorCode) {
           case 'auth/weak-password':
-            goToast('The password is too weak', 'error');
+            goToast(`${texts.registerPage.errorWeakPassword}`, 'error');
             break;
           case 'auth/email-already-in-use':
             goToast(
-              'This email address is already in use by another account',
+              `${texts.registerPage.errorEmailAlreadyInUse}`,
               'error',
             );
             break;
           case 'auth/invalid-email':
-            goToast('This email address is invalid', 'error');
+            goToast(`${texts.authPage.errorEmail}`, 'error');
             break;
           case 'auth/operation-not-allowed':
-            goToast('Email/password accounts are not enabled', 'error');
+            goToast(`${texts.registerPage.errorOperationNotAllowed}`, 'error');
             break;
           default:
             goToast(`${errorMessage}`, 'error');
@@ -83,34 +86,34 @@ const RegistrationForm = () => {
   };
   return (
     <form className={classes.form} onSubmit={handleSubmit(onSubmitHandler)}>
-      <h2>Create Account</h2>
+      <h2>{texts.registerPage.registerTitle}</h2>
       <div className={classes.inputs}>
         <FormField
           type={'email'}
-          placeholder={'email'}
+          placeholder={texts.registerPage.email}
           register={{ ...register('email') }}
           errors={errors.email}
         />
         <FormField
           type={'password'}
-          placeholder={'password'}
+          placeholder={texts.registerPage.password}
           register={{ ...register('password') }}
           errors={errors.password}
         />
         <FormField
           type={'password'}
-          placeholder={'confirm password'}
+          placeholder={texts.registerPage.confirmPassword}
           register={{ ...register('confirmPassword') }}
           errors={errors.confirmPassword}
         />
       </div>
       <button disabled={!isValid} className={classes.button} type="submit">
-        register
+      {texts.registerPage.registerBtn}
       </button>
       <p className={classes.text}>
-        you have an account?
+      {texts.registerPage.registerText}
         <NavLink className={classes.link} to="/auth">
-          Login
+        {texts.registerPage.loginLink}
         </NavLink>
       </p>
       <Toaster />

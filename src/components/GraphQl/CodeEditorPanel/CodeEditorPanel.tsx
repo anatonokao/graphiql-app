@@ -6,6 +6,7 @@ import { buildClientSchema, IntrospectionQuery } from 'graphql/utilities';
 import { graphql } from 'cm6-graphql';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setRequest } from '@/store/GraphQl/graphqlSlice.ts';
+import { useLocalization } from '@/components/localization/LocalizationContext.tsx';
 
 type CodeEditorPanel = {
   schema: IntrospectionQuery | undefined;
@@ -14,6 +15,7 @@ type CodeEditorPanel = {
 
 const CodeEditorPanel: FC<CodeEditorPanel> = ({ isLoading, schema }) => {
   const dispatch = useAppDispatch();
+  const { texts } = useLocalization();
   const code = useAppSelector((state) => state.graphqlSlice.request);
 
   const changeHandler = (value: string) => {
@@ -27,7 +29,7 @@ const CodeEditorPanel: FC<CodeEditorPanel> = ({ isLoading, schema }) => {
       <CodeMirror
         theme={editorTheme()}
         spellCheck={true}
-        placeholder={'Write something...'}
+        placeholder={texts.graphQLPage.operationText}
         value={code}
         onChange={changeHandler}
         extensions={schema && graphql(buildClientSchema(schema))}

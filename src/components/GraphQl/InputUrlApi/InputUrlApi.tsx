@@ -2,8 +2,10 @@ import React, { ChangeEvent, FC, useState } from 'react';
 import styles from './InputUrlApi.module.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks.ts';
 import { setApiUrl } from '@/store/GraphQl/graphqlSlice.ts';
+import { useLocalization } from '@/components/localization/LocalizationContext';
 const InputUrlApi: FC = () => {
   const url = useAppSelector((state) => state.graphqlSlice.apiUrl);
+  const { texts } = useLocalization();
   const dispatch = useAppDispatch();
 
   const [inputValue, setInputValue] = useState(url);
@@ -35,16 +37,16 @@ const InputUrlApi: FC = () => {
         />
         {isInputEditable ? (
           <button className={styles.actionBtn} onClick={saveBtnHandler}>
-            Save
+            {texts.graphQLPage.btnSave}
           </button>
         ) : (
           <button className={styles.actionBtn} onClick={editBtnHandler}>
-            Edit
+            {texts.graphQLPage.btnEdit}
           </button>
         )}
       </div>
       <div className={styles.caption}>
-        Attention: only APIs that support GraphQL
+        {texts.graphQLPage.warningText}
       </div>
     </div>
   );

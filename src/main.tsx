@@ -17,17 +17,19 @@ import AuthPage from '@/components/AuthPage/AuthPage.tsx';
 import RegistrationPage from '@/components/RegistrationPage/RegistrationPage.tsx';
 import RootLayout from '@/components/GraphQl/layouts/RootLayout.tsx';
 import WelcomePage from '@/components/welcome-page/WelcomePage.tsx';
+import NotFoundPage from '@/components/NotFoundPage/NotFoundPage.tsx';
 
 const store = setupStore();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/" element={<WelcomePage />} />
+      <Route path="/" element={< WelcomePage />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="/playground" element={<RootLayout />} />
       <Route path="/styleguide" element={<StyleGuide />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>,
   ),
 );

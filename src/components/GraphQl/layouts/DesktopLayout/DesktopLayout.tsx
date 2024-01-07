@@ -16,6 +16,7 @@ import RunBtn from '@/components/GraphQl/RunBtn/RunBtn.tsx';
 import Prettifyer from '@/components/GraphQl/Prettifyer/Prettifyer.tsx';
 import Loader from '@/components/common/Loading/Loader/Loader.tsx';
 import { IntrospectionQuery } from 'graphql/utilities';
+import { useLocalization } from '@/components/localization/LocalizationContext';
 
 type DesktopLayoutProps = {
   data: IntrospectionQuery | undefined;
@@ -29,6 +30,7 @@ const DesktopLayout: FC<DesktopLayoutProps> = ({
   isError,
 }) => {
   const [isDocPanelOpen, setIsDocPanelOpen] = useState(false);
+  const { texts } = useLocalization();
   const DocPanel = lazy(
     () => import('@/components/GraphQl/DocPanel/DocPanel.tsx'),
   );
@@ -56,13 +58,10 @@ const DesktopLayout: FC<DesktopLayoutProps> = ({
           isError ? (
             <div className={styles.error}>
               <div className={styles.errorTitle}>
-                Oops, seems something went wrong!
+                {texts.graphQLPage.errorTitleAPI}
               </div>
               <div className={styles.errorText}>
-                Maybe our coders forgot to eat, and now they are not performing
-                at their best. We are already feeding them cookies 🍪, but just
-                to be sure, please check that the server link is correct, the
-                server is work, and it supports GraphQL queries.
+              {texts.graphQLPage.errorAPI}
               </div>
             </div>
           ) : (
@@ -106,7 +105,7 @@ const DesktopLayout: FC<DesktopLayoutProps> = ({
                     id="graphiql-CodeEditorPanel"
                   >
                     <div className={styles.header}>
-                      <h5 className={styles.panelTitle}>Operation</h5>
+                      <h5 className={styles.panelTitle}>{texts.graphQLPage.operationTitle}</h5>
                       <div className={styles.headerRight}>
                         <Prettifyer />
                         <RunBtn />
@@ -139,13 +138,13 @@ const DesktopLayout: FC<DesktopLayoutProps> = ({
                           className={styles.tabBtn}
                           selectedClassName={styles.tabBtnActive}
                         >
-                          Vars
+                          {texts.graphQLPage.vars}
                         </Tab>
                         <Tab
                           className={styles.tabBtn}
                           selectedClassName={styles.tabBtnActive}
                         >
-                          Headers
+                          {texts.graphQLPage.headers}
                         </Tab>
                       </TabList>
                       <TabPanel selectedClassName={styles.tab}>
@@ -166,7 +165,7 @@ const DesktopLayout: FC<DesktopLayoutProps> = ({
                 order={2}
               >
                 <div className={styles.header}>
-                  <h5 className={styles.panelTitle}>Results</h5>
+                  <h5 className={styles.panelTitle}>{texts.graphQLPage.results}</h5>
                 </div>
                 <ResultPanel />
               </Panel>
