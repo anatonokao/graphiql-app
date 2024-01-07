@@ -7,6 +7,7 @@ import { setupStore } from '@/store/store.ts';
 import RunBtn from '@/components/GraphQl/RunBtn/RunBtn.tsx';
 import { userEvent } from '@testing-library/user-event';
 import { graphqlAPI } from '@/store/GraphQl/graphqlAPI/graphqlAPI.ts';
+import { LocalizationProvider } from '@/components/localization/LocalizationContext.tsx';
 
 describe('Runner', () => {
   vi.mock('react-redux', async () => ({
@@ -24,7 +25,9 @@ describe('Runner', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RunBtn />
+          <LocalizationProvider>
+            <RunBtn />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -43,7 +46,9 @@ describe('Runner', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RunBtn />
+          <LocalizationProvider>
+            <RunBtn />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );

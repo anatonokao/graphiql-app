@@ -9,6 +9,7 @@ import { setupStore } from '@/store/store.ts';
 import { vi } from 'vitest';
 import toast, { Toaster } from 'react-hot-toast';
 import { getAuth } from 'firebase/auth';
+import { LocalizationProvider } from '@/components/localization/LocalizationContext.tsx';
 vi.mock('firebase/auth');
 window.matchMedia =
   window.matchMedia ||
@@ -24,7 +25,9 @@ describe('registration page', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RegistrationPage />
+          <LocalizationProvider>
+            <RegistrationPage />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -35,7 +38,9 @@ describe('registration page', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RegistrationPage />
+          <LocalizationProvider>
+            <RegistrationPage />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -51,7 +56,9 @@ describe('registration page', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RegistrationPage />
+          <LocalizationProvider>
+            <RegistrationPage />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -70,7 +77,9 @@ describe('registration page', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RegistrationPage />
+          <LocalizationProvider>
+            <RegistrationPage />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -81,7 +90,9 @@ describe('registration page', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RegistrationPage />
+          <LocalizationProvider>
+            <RegistrationPage />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -101,8 +112,10 @@ describe('registration page', () => {
     render(
       <MemoryRouter>
         <Provider store={setupStore()}>
-          <RegistrationPage />
-          <Toaster />
+          <LocalizationProvider>
+            <RegistrationPage />
+            <Toaster />
+          </LocalizationProvider>
         </Provider>
       </MemoryRouter>,
     );
@@ -133,8 +146,10 @@ describe('registration page', () => {
     render(
       <MemoryRouter>
         <Provider store={setupStore()}>
-          <RegistrationPage />
-          <Toaster />
+          <LocalizationProvider>
+            <RegistrationPage />
+            <Toaster />
+          </LocalizationProvider>
         </Provider>
       </MemoryRouter>,
     );

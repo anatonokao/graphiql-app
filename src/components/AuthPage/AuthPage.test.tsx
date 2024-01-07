@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { setupStore } from '@/store/store.ts';
 import { getAuth } from 'firebase/auth';
 import toast, { Toaster } from 'react-hot-toast';
+import { LocalizationProvider } from '@/components/localization/LocalizationContext.tsx';
 vi.mock('firebase/auth');
 window.matchMedia =
   window.matchMedia ||
@@ -32,8 +33,10 @@ window.matchMedia =
       render(
         <MemoryRouter>
           <Provider store={setupStore()}>
-            <AuthPage />
-            <Toaster />
+            <LocalizationProvider>
+              <AuthPage />
+              <Toaster />
+            </LocalizationProvider>
           </Provider>
         </MemoryRouter>,
       );
@@ -56,7 +59,9 @@ window.matchMedia =
       render(
         <BrowserRouter>
           <Provider store={setupStore()}>
-            <AuthPage />
+            <LocalizationProvider>
+              <AuthPage />
+            </LocalizationProvider>
           </Provider>
         </BrowserRouter>,
       );
@@ -69,7 +74,9 @@ window.matchMedia =
       render(
         <BrowserRouter>
           <Provider store={setupStore()}>
-            <AuthPage />
+            <LocalizationProvider>
+              <AuthPage />
+            </LocalizationProvider>
           </Provider>
         </BrowserRouter>,
       );
@@ -82,7 +89,9 @@ window.matchMedia =
       render(
         <BrowserRouter>
           <Provider store={setupStore()}>
-            <AuthPage />
+            <LocalizationProvider>
+              <AuthPage />
+            </LocalizationProvider>
           </Provider>
         </BrowserRouter>,
       );
@@ -97,7 +106,9 @@ window.matchMedia =
       render(
         <BrowserRouter>
           <Provider store={setupStore()}>
-            <AuthPage />
+            <LocalizationProvider>
+              <AuthPage />
+            </LocalizationProvider>
           </Provider>
         </BrowserRouter>,
       );
@@ -108,7 +119,9 @@ window.matchMedia =
       render(
         <BrowserRouter>
           <Provider store={setupStore()}>
-            <AuthPage />
+            <LocalizationProvider>
+              <AuthPage />
+            </LocalizationProvider>
           </Provider>
         </BrowserRouter>,
       );
@@ -128,8 +141,10 @@ window.matchMedia =
       render(
         <MemoryRouter>
           <Provider store={setupStore()}>
-            <AuthPage />
-            <Toaster />
+            <LocalizationProvider>
+              <AuthPage />
+              <Toaster />
+            </LocalizationProvider>
           </Provider>
         </MemoryRouter>,
       );
@@ -152,14 +167,16 @@ window.matchMedia =
       firebase.getAuth = vi.fn();
       firebase.signInWithEmailAndPassword = vi
         .fn()
-        .mockReturnValue(Promise.reject({ code: 'auth/user-disabled' }));
+        .mockRejectedValue({ code: 'auth/user-disabled' });
 
       const spyOnToastError = vi.spyOn(toast, 'error');
       render(
         <MemoryRouter>
           <Provider store={setupStore()}>
-            <AuthPage />
-            <Toaster />
+            <LocalizationProvider>
+              <AuthPage />
+              <Toaster />
+            </LocalizationProvider>
           </Provider>
         </MemoryRouter>,
       );

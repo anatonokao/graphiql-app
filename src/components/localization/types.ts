@@ -1,4 +1,5 @@
 export type Texts = {
+  errorLogin: string;
   header: Header;
   welcomePage: WelcomePage;
   authPage: AuthPage;
@@ -38,11 +39,13 @@ type AuthPage = {
   loginBtn: string;
   loginText: string;
   registerLink: string;
-  
+
   authSuccess: string;
   errorEmail: string;
+  errorEmailRequired: string;
   errorUserDisabled: string;
-  erroruserNotFound: string;
+  errorUserNotFound: string;
+  errorPasswordRequired: string;
   errorWrongPassword: string;
   errorInvalid: string;
 
@@ -52,7 +55,7 @@ type AuthPage = {
   errorSpecial: string;
 
   errorEmailInput: string;
-}
+};
 
 type RegisterPage = {
   registerTitle: string;
@@ -69,13 +72,16 @@ type RegisterPage = {
   errorOperationNotAllowed: string;
 
   errorConfirmPassword: string;
-}
+};
 
 type GraphQLPage = {
+  getSchemaError: string;
   btnEdit: string;
   warningText: string;
   operationTitle: string;
   startBtn: string;
+  incorrectOperation: string;
+  prettifySuccessfully: string;
   results: string;
   vars: string;
   headers: string;
@@ -83,7 +89,7 @@ type GraphQLPage = {
   btnSave: string;
   errorTitleAPI: string;
   errorAPI: string;
-}
+};
 
 export type LocalizationContextType = {
   texts: Texts;

@@ -5,19 +5,28 @@ import { setRequest } from '@/store/GraphQl/graphqlSlice.ts';
 import { isQueryValid } from '@/components/GraphQl/graphql-helpers.ts';
 import { goToast } from '@/components/toast-helper.ts';
 import AnimBroom from '@/components/GraphQl/Prettifyer/AnimBroom/AnimBroom.tsx';
+import { useLocalization } from '@/components/localization/LocalizationContext.tsx';
 
 const Prettifyer: FC = () => {
+  const { texts } = useLocalization();
+
   const request = useAppSelector((state) => state.graphqlSlice.request);
   const dispatch = useAppDispatch();
   const onClickHandler = () => {
     if (!isQueryValid(request)) {
-      goToast('Invalid GraphQl operation!', 'error');
+      goToast(texts.graphQLPage.incorrectOperation, 'error');
       return;
     }
 
     const formattedRequest = prettify(request);
     dispatch(setRequest(formattedRequest));
-    goToast('All Clear!', 'custom', 'successToast', AnimBroom(), 3000);
+    goToast(
+      texts.graphQLPage.prettifySuccessfully,
+      'custom',
+      'successToast',
+      AnimBroom(),
+      3000,
+    );
   };
 
   function prettify(code: string) {
