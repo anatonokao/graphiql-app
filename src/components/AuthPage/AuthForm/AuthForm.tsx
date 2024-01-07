@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import classes from './AuthForm.module.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import FormField from '@/components/common/FormField.tsx';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase.tsx';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAppSelector } from '@/store/hooks.ts';
 
 const schemaAuth = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required(),
+  email: yup.string().email().required('email is a required field'),
+  password: yup
+    .string()
+    .required('password is a required field')
+    .matches(/[A-Z]/, 'at least one uppercase required')
+    .matches(/[a-z]/, 'at least one lowercase required')
+    .matches(/[1-9]/, 'at least one digit required')
+    .matches(
+      /[!@#$%^&*()\-_=+{};:,<.>]/,
+      'at least one special character required',
+    )
+    .min(8),
 });
 export type FormData = {
   email: string;
@@ -35,6 +46,14 @@ export const goToast = (text: string, type: string) => {
 };
 
 const AuthForm = () => {
+  const navigate = useNavigate();
+  const { isAuth } = useAppSelector((state) => state.authSlice);
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/playground');
+    }
+  }, [isAuth]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const {
     register,
     handleSubmit,
@@ -48,10 +67,10 @@ const AuthForm = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         goToast('Welcome to the team', 'success');
+        navigate('/playground');
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         switch (errorCode) {
           case 'auth/invalid-email':
             goToast('This email address is invalid', 'error');
@@ -72,7 +91,7 @@ const AuthForm = () => {
             );
             break;
           default:
-            goToast(`${errorMessage}`, 'error');
+            goToast('Email address or password is invalid', 'error');
             break;
         }
       });

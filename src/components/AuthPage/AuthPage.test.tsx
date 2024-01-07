@@ -40,13 +40,13 @@ window.matchMedia =
       const inputEmail = screen.getByPlaceholderText(/email/i);
       const inputPassword = screen.getByPlaceholderText(/password/i);
       await userEvent.type(inputEmail, 'myLogin@en');
-      await userEvent.type(inputPassword, 'myPassword');
+      await userEvent.type(inputPassword, 'myPassword1!');
       const btn = screen.getByRole('button');
       await userEvent.click(btn);
       expect(firebase.signInWithEmailAndPassword).toHaveBeenCalledWith(
         getAuth(),
         'myLogin@en',
-        'myPassword',
+        'myPassword1!',
       );
       expect(spyOnToastForLogin).toBeCalled();
     });
@@ -55,7 +55,9 @@ window.matchMedia =
     test('auth page render', async () => {
       render(
         <BrowserRouter>
-          <AuthPage />
+          <Provider store={setupStore()}>
+            <AuthPage />
+          </Provider>
         </BrowserRouter>,
       );
       expect(await screen.findByText('Login to account')).toBeInTheDocument();
@@ -66,7 +68,9 @@ window.matchMedia =
     test('render inputs', async () => {
       render(
         <BrowserRouter>
-          <AuthPage />
+          <Provider store={setupStore()}>
+            <AuthPage />
+          </Provider>
         </BrowserRouter>,
       );
       const inputEmail = screen.getByPlaceholderText(/email/i);
@@ -77,7 +81,9 @@ window.matchMedia =
     test('change value for inputs', async () => {
       render(
         <BrowserRouter>
-          <AuthPage />
+          <Provider store={setupStore()}>
+            <AuthPage />
+          </Provider>
         </BrowserRouter>,
       );
       const inputEmail = screen.getByPlaceholderText(/email/i);
@@ -90,7 +96,9 @@ window.matchMedia =
     test('button login disabled', async () => {
       render(
         <BrowserRouter>
-          <AuthPage />
+          <Provider store={setupStore()}>
+            <AuthPage />
+          </Provider>
         </BrowserRouter>,
       );
       const btn = screen.getByRole('button');
@@ -128,13 +136,13 @@ window.matchMedia =
       const inputEmail = screen.getByPlaceholderText(/email/i);
       const inputPassword = screen.getByPlaceholderText(/password/i);
       await userEvent.type(inputEmail, 'myLogin@en');
-      await userEvent.type(inputPassword, 'myPassword');
+      await userEvent.type(inputPassword, 'myPassword1!');
       const btn = screen.getByRole('button');
       await userEvent.click(btn);
       expect(firebase.signInWithEmailAndPassword).toHaveBeenCalledWith(
         getAuth(),
         'myLogin@en',
-        'myPassword',
+        'myPassword1!',
       );
       expect(spyOnToastError).toBeCalled();
     });

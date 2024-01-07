@@ -23,7 +23,9 @@ describe('registration page', () => {
   test('registration page render', async () => {
     render(
       <BrowserRouter>
-        <RegistrationPage />
+        <Provider store={setupStore()}>
+          <RegistrationPage />
+        </Provider>
       </BrowserRouter>,
     );
     expect(await screen.findByText('Create Account')).toBeInTheDocument();
@@ -32,7 +34,9 @@ describe('registration page', () => {
   test('render inputs', async () => {
     render(
       <BrowserRouter>
-        <RegistrationPage />
+        <Provider store={setupStore()}>
+          <RegistrationPage />
+        </Provider>
       </BrowserRouter>,
     );
     const inputEmail = screen.getByPlaceholderText(/email/i);
@@ -46,7 +50,9 @@ describe('registration page', () => {
   test('change value for inputs', async () => {
     render(
       <BrowserRouter>
-        <RegistrationPage />
+        <Provider store={setupStore()}>
+          <RegistrationPage />
+        </Provider>
       </BrowserRouter>,
     );
     const inputEmail = screen.getByPlaceholderText(/email/i);
@@ -54,16 +60,18 @@ describe('registration page', () => {
     const inputConfirmPassword =
       screen.getByPlaceholderText('confirm password');
     await userEvent.type(inputEmail, 'myLogin');
-    await userEvent.type(inputPassword, 'myPassword');
-    await userEvent.type(inputConfirmPassword, 'myPassword');
+    await userEvent.type(inputPassword, 'myPassword1!');
+    await userEvent.type(inputConfirmPassword, 'myPassword1!');
     expect(inputEmail).toHaveValue('myLogin');
-    expect(inputPassword).toHaveValue('myPassword');
-    expect(inputConfirmPassword).toHaveValue('myPassword');
+    expect(inputPassword).toHaveValue('myPassword1!');
+    expect(inputConfirmPassword).toHaveValue('myPassword1!');
   });
   test('button register disabled', async () => {
     render(
       <BrowserRouter>
-        <RegistrationPage />
+        <Provider store={setupStore()}>
+          <RegistrationPage />
+        </Provider>
       </BrowserRouter>,
     );
     const btn = screen.getByRole('button');
@@ -103,14 +111,14 @@ describe('registration page', () => {
     const inputConfirmPassword =
       screen.getByPlaceholderText('confirm password');
     await userEvent.type(inputEmail, 'myLogin@en');
-    await userEvent.type(inputPassword, 'myPassword');
-    await userEvent.type(inputConfirmPassword, 'myPassword');
+    await userEvent.type(inputPassword, 'myPassword1!');
+    await userEvent.type(inputConfirmPassword, 'myPassword1!');
     const btn = screen.getByRole('button');
     await userEvent.click(btn);
     expect(firebase.createUserWithEmailAndPassword).toHaveBeenCalledWith(
       getAuth(),
       'myLogin@en',
-      'myPassword',
+      'myPassword1!',
     );
     expect(spyOnToastError).toBeCalled();
   });
@@ -135,14 +143,14 @@ describe('registration page', () => {
     const inputConfirmPassword =
       screen.getByPlaceholderText('confirm password');
     await userEvent.type(inputEmail, 'myLogin@en');
-    await userEvent.type(inputPassword, 'myPassword');
-    await userEvent.type(inputConfirmPassword, 'myPassword');
+    await userEvent.type(inputPassword, 'myPassword1!');
+    await userEvent.type(inputConfirmPassword, 'myPassword1!');
     const btn = screen.getByRole('button');
     await userEvent.click(btn);
     expect(firebase.createUserWithEmailAndPassword).toHaveBeenCalledWith(
       getAuth(),
       'myLogin@en',
-      'myPassword',
+      'myPassword1!',
     );
     expect(spyOnToastForRegister).toBeCalled();
   });

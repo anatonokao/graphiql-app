@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import classes from '@/components/AuthPage/AuthForm/AuthForm.module.scss';
 import FormField from '@/components/common/FormField.tsx';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { ref } from 'yup';
 import { FormData, goToast } from '@/components/AuthPage/AuthForm/AuthForm.tsx';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase.tsx';
 import { Toaster } from 'react-hot-toast';
+import { useAppSelector } from '@/store/hooks.ts';
 
 const schemaRegistration = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required(),
+  email: yup.string().email().required('email is a required field'),
+  password: yup
+    .string()
+    .required('password is a required field')
+    .matches(/[A-Z]/, 'at least one uppercase required')
+    .matches(/[a-z]/, 'at least one lowercase required')
+    .matches(/[1-9]/, 'at least one digit required')
+    .matches(
+      /[!@#$%^&*()\-_=+{};:,<.>]/,
+      'at least one special character required',
+    )
+    .min(8),
   confirmPassword: yup
     .string()
     .oneOf([ref('password')], 'password fields must match')
@@ -21,6 +32,13 @@ const schemaRegistration = yup.object().shape({
 });
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
+  const { isAuth } = useAppSelector((state) => state.authSlice);
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/playground');
+    }
+  }, [isAuth]); // eslint-disable-line react-hooks/exhaustive-deps
   const {
     register,
     handleSubmit,
@@ -34,6 +52,7 @@ const RegistrationForm = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
         goToast('Account is created', 'success');
+        navigate('/playground');
       })
       .catch((error) => {
         const errorCode = error.code;
