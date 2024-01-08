@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { setupStore } from '@/store/store.ts';
 import Prettifyer from '@/components/GraphQl/Prettifyer/Prettifyer.tsx';
 import { userEvent } from '@testing-library/user-event';
+import { LocalizationProvider } from '@/components/localization/LocalizationContext.tsx';
 describe('Prettifyer for Code Editor', () => {
   test('Prettifying', async () => {
     const mockFn = vi.hoisted(() => ({ dispatch: vi.fn() }));
@@ -19,7 +20,9 @@ describe('Prettifyer for Code Editor', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <Prettifyer />
+          <LocalizationProvider>
+            <Prettifyer />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );

@@ -6,13 +6,16 @@ import InputUrlApi from '@/components/GraphQl/InputUrlApi/InputUrlApi.tsx';
 import { Provider } from 'react-redux';
 import { setupStore } from '@/store/store.ts';
 import { userEvent } from '@testing-library/user-event';
+import { LocalizationProvider } from '@/components/localization/LocalizationContext.tsx';
 
 describe('Input for url to API', () => {
   test('Input render', async () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <InputUrlApi />
+          <LocalizationProvider>
+            <InputUrlApi />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -26,7 +29,9 @@ describe('Input for url to API', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <InputUrlApi />
+          <LocalizationProvider>
+            <InputUrlApi />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );

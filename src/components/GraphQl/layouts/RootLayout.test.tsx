@@ -10,6 +10,7 @@ import { mocks } from '../../../../tests/mocks.ts';
 import { IntrospectionQuery } from 'graphql/utilities';
 import { userEvent } from '@testing-library/user-event';
 import MobileLayout from '@/components/GraphQl/layouts/MobileLayout/MobileLayout.tsx';
+import { LocalizationProvider } from '@/components/localization/LocalizationContext.tsx';
 describe('Root Layout', () => {
   vi.mock('cm6-graphql', () => ({
     graphql: vi.fn(),
@@ -32,7 +33,9 @@ describe('Root Layout', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RootLayout />
+          <LocalizationProvider>
+            <RootLayout />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -52,7 +55,9 @@ describe('Root Layout', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <RootLayout />
+          <LocalizationProvider>
+            <RootLayout />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -78,11 +83,13 @@ describe('Root Layout', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <DesktopLayout
-            data={mocks.graphQLSchema as unknown as IntrospectionQuery}
-            isFetching={false}
-            isError={false}
-          />
+          <LocalizationProvider>
+            <DesktopLayout
+              data={mocks.graphQLSchema as unknown as IntrospectionQuery}
+              isFetching={false}
+              isError={false}
+            />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -112,11 +119,13 @@ describe('Root Layout', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <MobileLayout
-            data={mocks.graphQLSchema as unknown as IntrospectionQuery}
-            isFetching={false}
-            isError={false}
-          />
+          <LocalizationProvider>
+            <MobileLayout
+              data={mocks.graphQLSchema as unknown as IntrospectionQuery}
+              isFetching={false}
+              isError={false}
+            />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -146,11 +155,13 @@ describe('Root Layout', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <DesktopLayout
-            data={mocks.graphQLSchema as unknown as IntrospectionQuery}
-            isFetching={false}
-            isError={true}
-          />
+          <LocalizationProvider>
+            <DesktopLayout
+              data={mocks.graphQLSchema as unknown as IntrospectionQuery}
+              isFetching={false}
+              isError={true}
+            />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
@@ -173,11 +184,13 @@ describe('Root Layout', () => {
     render(
       <BrowserRouter>
         <Provider store={setupStore()}>
-          <MobileLayout
-            data={mocks.graphQLSchema as unknown as IntrospectionQuery}
-            isFetching={false}
-            isError={true}
-          />
+          <LocalizationProvider>
+            <MobileLayout
+              data={mocks.graphQLSchema as unknown as IntrospectionQuery}
+              isFetching={false}
+              isError={true}
+            />
+          </LocalizationProvider>
         </Provider>
       </BrowserRouter>,
     );
