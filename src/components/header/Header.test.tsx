@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Header from '@/components/header/Header.tsx';
@@ -42,5 +42,31 @@ describe('header', () => {
     await userEvent.selectOptions(ruBtn, ['ru']);
 
     expect(await screen.findByText('Главная')).toBeInTheDocument();
+  });
+
+  test('Burger test', async () => {
+    render(
+      <BrowserRouter>
+        <Provider store={setupStore()}>
+          <LocalizationProvider>
+            <Header />
+          </LocalizationProvider>
+        </Provider>
+      </BrowserRouter>,
+    );
+
+    Object.defineProperty(global, 'innerWidth', {
+      writable: true,
+      configurable: true,
+      value: 450,
+    });
+
+    fireEvent(window, new Event('resize'));
+
+    const burgerBtn = await screen.findByTestId('burgerMenuBtn');
+
+    await userEvent.click(burgerBtn);
+
+    expect(await screen.findByText('Home')).toBeInTheDocument();
   });
 });

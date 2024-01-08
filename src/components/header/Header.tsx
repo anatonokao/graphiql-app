@@ -86,6 +86,7 @@ function Header() {
       <div
         className={`burger-menu ${isSticky ? 'sticky' : ''}`}
         onClick={handleMenuToggle}
+        data-testid='burgerMenuBtn'
       >
         <img
           className="burger-menu-icon"
