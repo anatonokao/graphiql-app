@@ -1,0 +1,31 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  width: max-content;
+}
+
+.fieldBody {
+  @include title;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 400;
+  gap: 5px;
+}
+
+.fieldDesc {
+  @include subtitle;
+  font-size: 1rem;
+}
+
+.args {
+  display: flex;
+  flex-shrink: 0;
+  gap: 5px;
+}
+
+.fieldBtn {
+  @include base-link;
+  font-size: 1.2rem;
+}

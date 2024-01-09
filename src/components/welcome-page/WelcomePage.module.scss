@@ -1,0 +1,229 @@
+.welcomePage {
+  width: 100%;
+  background-color: $bg-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  & > div {
+    margin-bottom: 80px;
+    &:first-child {
+      margin-top: 50px;
+    }
+    &:last-child {
+      margin-bottom: 50px;
+    }
+  }
+
+  padding: 0 20px;
+}
+
+b {
+  font-weight: 700;
+}
+
+.aboutProjectContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.aboutHeader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  @include title;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.aboutSubtitle {
+  @include title;
+  font-size: 1.5rem;
+  text-align: right;
+  width: 45%;
+}
+
+.parallaxContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.parallaxImg {
+  width: 100px;
+  height: 100px;
+}
+
+.subtitle {
+  @include subtitle;
+  font-size: 1.5rem;
+}
+
+.aboutInfo {
+  @include subtitle;
+  font-size: 1.3rem;
+  width: 100%;
+  text-align: center;
+}
+
+.keyFuturesContainer {
+  @include subtitle;
+  font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 30px;
+  width: 100%;
+}
+
+.keyFuturesBody {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.keyVideo {
+  width: 50%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid $blue-neon-glow;
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.futureTitle {
+  @include title;
+  font-size: 1.4rem;
+}
+
+.futuresContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 50%;
+}
+
+.endingAboutProject {
+  .endingAboutProjectText {
+    @include subtitle;
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.aboutUsContainer {
+  @include subtitle;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 30px;
+  width: 100%;
+}
+
+.aboutUsBody {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 30px;
+}
+
+.developerContainer {
+  display: flex;
+  width: 280px;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid $clr-base-2;
+  border-radius: 10px;
+  padding: 30px 20px;
+  transition: $transition;
+  cursor: pointer;
+  .developerImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border: 1px solid transparent;
+    transition: $transition;
+    will-change: contents;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .developerName {
+    @include title;
+    font-size: 1.5rem;
+  }
+  .developerRole {
+    color: $clr-active;
+    font-size: 1.3rem;
+    transition: $transition;
+  }
+  .developerDesc {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  &:hover {
+    transform: scale(1.05);
+    border-color: $clr-active;
+    .developerImg {
+      border-color: $clr-active-2;
+    }
+    .developerRole {
+      color: $blue-neon-glow;
+    }
+  }
+}
+
+.aboutCourseContainer {
+  @include subtitle;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  a {
+    @include base-link;
+    font-size: 1rem;
+  }
+}
+
+//@media (max-width: 800px) {
+//  .aboutUsContainer {
+//    flex-direction: column;
+//    align-items: center;
+//  }
+//
+//  .aboutTitle {
+//    font-size: 2rem;
+//  }
+//
+//  .developersDesc {
+//    font-size: 1.5rem;
+//  }
+//
+//  .developers {
+//    width: 75%;
+//  }
+//}

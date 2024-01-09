@@ -1,0 +1,87 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  @include title;
+  margin-bottom: 20px;
+}
+
+.titles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titleExample {
+  @include title;
+}
+
+.subtitle {
+  @include subtitle;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & > * {
+    padding: 30px;
+    border-bottom: 1px solid #424242;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+.buttons {
+}
+
+button {
+  background-color: transparent;
+}
+
+.baseButton {
+  @include base-button;
+}
+.redNeonButton {
+  @include neon-button($red: true);
+}
+.blueNeonButton {
+  @include neon-button;
+}
+
+.link {
+  @include base-link;
+}
+
+.customLink {
+  @include base-link;
+  color: #d55d5d;
+  &:hover {
+    color: #ff9292;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: $clr-base;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 20px;
+  .input {
+    @include form-input;
+  }
+  .button {
+    @include form-button;
+  }
+}
+
+.formTitle {
+  @include form-title;
+}
