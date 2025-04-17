@@ -1,0 +1,21 @@
+.typeHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.typeName {
+  @include title;
+  font-size: 1.5rem;
+}
+
+.typeDesc {
+  @include subtitle;
+  font-size: 1.1rem;
+}
+
+.typeBtn {
+  @include base-link;
+  font-size: 1.5rem;
+}

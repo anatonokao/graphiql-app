@@ -1,0 +1,22 @@
+.container {
+  padding: 20px;
+  @include title;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+.eyes {
+  max-width: 60%;
+}
+.notFound {
+}
+.subTitle {
+  @include subtitle;
+}
+.btn {
+  @include neon-button;
+}
