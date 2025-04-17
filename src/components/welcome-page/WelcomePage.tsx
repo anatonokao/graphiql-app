@@ -133,15 +133,6 @@ function WelcomePage() {
           </div>
         </div>
       </div>
-      <div className={s.aboutCourseContainer}>
-        <div className={s.aboutCourseBody}></div>
-        <div
-          className={s.aboutCourseText}
-          dangerouslySetInnerHTML={{
-            __html: texts.welcomePage.textAboutCourse,
-          }}
-        ></div>
-      </div>
     </div>
   );
 }

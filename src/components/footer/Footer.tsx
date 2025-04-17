@@ -1,14 +1,14 @@
 import React from 'react';
 import './Footer.scss';
-import { NavLink } from 'react-router-dom';
-import rsschoolLogo from '../../assets/rs_school_js.svg';
-import githubLogo from '../../assets/icon_github.png';
+// import { NavLink } from 'react-router-dom';
+// import rsschoolLogo from '../../assets/rs_school_js.svg';
+// import githubLogo from '../../assets/icon_github.png';
 
 function Footer() {
   return (
     <div className="footer">
-      <p className="year">&#169; 2024</p>
-      <div className="github">
+      <p className="year">All rights reserved &#169; 2024</p>
+      {/* <div className="github">
         <img className="github__img" src={githubLogo} alt="github-logo" />
         <NavLink className="nav-link" to="https://github.com/anatonokao">
           Alexander
@@ -19,8 +19,8 @@ function Footer() {
         <NavLink className="nav-link" to="https://github.com/Valeriy95">
           Valeriy
         </NavLink>
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <a className="footer__logo" href="https://rs.school/react/">
           <img
             className="footer__logo"
@@ -28,7 +28,7 @@ function Footer() {
             alt="rsschool-logo"
           />
         </a>
-      </div>
+      </div> */}
     </div>
   );
 }
